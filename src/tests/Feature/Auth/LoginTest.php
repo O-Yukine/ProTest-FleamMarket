@@ -11,7 +11,7 @@ class LoginTest extends TestCase
 {
     use RefreshDatabase;
 
-    public function test_usr_can_access_to_loginpage()
+    public function test_user_can_access_to_loginpage()
     {
         $response = $this->get('/login');
 
