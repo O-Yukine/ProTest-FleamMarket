@@ -31,6 +31,3 @@
         </ul>
     </nav>
 @endguest
-
-
-</header>

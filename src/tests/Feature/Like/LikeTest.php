@@ -36,7 +36,7 @@ class LikeTest extends TestCase
         ]);
     }
 
-    public function test_button_color_will_change()
+    public function test_button_image_changes_on_like_and_unlike()
     {
 
         $seller = User::factory()->create();
