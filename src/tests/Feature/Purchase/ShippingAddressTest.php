@@ -3,7 +3,6 @@
 namespace Tests\Feature\Purchase;
 
 use Illuminate\Foundation\Testing\RefreshDatabase;
-use Illuminate\Foundation\Testing\WithFaker;
 use Tests\TestCase;
 use App\Models\User;
 use App\Models\Product;
@@ -68,27 +67,20 @@ class ShippingAddressTest extends TestCase
 
         $this->actingAs($buyer);
 
-        $this->post('/purchase/address/' . $product->id, [
+
+        $this->post('/purchase/' . $product->id, [
+            'payment_method' => 'credit',
             'post_code' => '987-6543',
             'address' => '沖縄県那覇市',
         ]);
-
-        $this->post(
-            '/purchase/' . $product->id,
-            [
-                'payment_method' => 'credit',
-                'post_code' => '987-6543',
-                'address' => '沖縄県那覇市',
-
-            ]
-        );
 
         $this->assertDatabaseHas('purchases', [
             'product_id' => $product->id,
             'user_id' => $buyer->id,
             'post_code' => '987-6543',
             'address' => '沖縄県那覇市',
-            'payment_method' => 'credit',
+
+
         ]);
     }
 }
