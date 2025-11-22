@@ -19,13 +19,6 @@ class MypageController extends Controller
 
     public function updateProfile(ProfileRequest $request)
     {
-        // $user_id = auth()->id();
-        // $user_name = $request->input('name');
-        // $profile = $request->only(['post_code', 'address', 'building']);
-
-        // User::find($user_id)->update(['name' => $user_name]);
-        // Profile::where('user_id', $user_id)->update($profile);
-
         $user = auth()->user();
 
         $profile = $request->only(['post_code', 'address', 'building']);

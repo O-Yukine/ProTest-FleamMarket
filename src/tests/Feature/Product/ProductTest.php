@@ -49,7 +49,7 @@ class ProductTest extends TestCase
         Purchase::create([
             'user_id' => $buyer->id,
             'product_id' => $product->id,
-            'payment_method' => 'card',
+            'payment_method' => 'credit',
             'post_code' => '123-4567',
             'address' => '東京都新宿区',
             'building' => null
