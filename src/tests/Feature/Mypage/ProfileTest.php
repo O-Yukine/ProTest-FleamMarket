@@ -5,7 +5,6 @@ namespace Tests\Feature\profile;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Tests\TestCase;
 use App\Models\User;
-use App\Models\Profile;
 use App\Models\Product;
 use App\Models\Purchase;
 
