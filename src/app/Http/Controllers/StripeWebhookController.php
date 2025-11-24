@@ -5,39 +5,40 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Purchase;
 use App\Enums\PurchaseStatus;
+use Stripe\Webhook;
 
 
 class StripeWebhookController extends Controller
 {
     public function handle(Request $request)
     {
-        $payload = $request->all();
-        $eventType = $payload['type'] ?? null;
+        $payload = $request->getContent();
+        $sig_header = $request->header('Stripe-Signature');
+        $secret = env('STRIPE_WEBHOOK_SECRET');
 
-        switch ($eventType) {
+        try {
+            $event = Webhook::constructEvent($payload, $sig_header, $secret);
+        } catch (\Exception $e) {
+            return response('', 400);
+        }
+
+        switch ($event->type) {
             case 'checkout.session.completed':
-                $session = $payload['data']['object'];
-                $purchaseId = $session['metadata']['purchase_id'] ?? null;
-
+                $session = $event->data->object;
+                $purchaseId = $session->metadata->purchase_id ?? null;
                 if ($purchaseId) {
-                    $purchase = Purchase::find($purchaseId);
-                    $purchase->status = 'paid';
-                    $purchase->save();
+                    Purchase::where('id', $purchaseId)->update(['status' => 'paid']);
                 }
                 break;
 
             case 'payment_intent.payment_failed':
-                $intent = $payload['data']['object'];
-                $purchaseId = $intent['metadata']['purchase_id'] ?? null;
-
+                $paymentIntent = $event->data->object;
+                $purchaseId = $paymentIntent->metadata->purchase_id ?? null;
                 if ($purchaseId) {
-                    $purchase = Purchase::find($purchaseId);
-                    $purchase->status = 'failed';
-                    $purchase->save();
+                    Purchase::where('id', $purchaseId)->update(['status' => 'failed']);
                 }
                 break;
         }
-
-        return response()->json(['received' => true]);
+        return response('', 200);
     }
 }
