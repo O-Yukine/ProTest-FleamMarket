@@ -25,7 +25,8 @@ class PurchaseController extends Controller
 
     public function completeOrder(Purchaserequest $request, $item_id)
     {
-        Purchase::create([
+        $purchase =  Purchase::create([
+            'status' => 'pending',
             'user_id' => auth()->id(),
             'product_id' => $item_id,
             'payment_method' => $request->payment_method,
@@ -44,7 +45,7 @@ class PurchaseController extends Controller
             'line_items' => [[
                 'price_data' => [
                     'currency' => 'jpy',
-                    'unit_amount' => $product->price,
+                    'unit_amount' => intval($product->price),
                     'product_data' => [
                         'name' => $product->name,
                     ],
@@ -53,7 +54,9 @@ class PurchaseController extends Controller
             ]],
             'mode' => 'payment',
             'success_url' => url('/') . '?message=' . urlencode('決済が完了しました'),
-
+            'metadata' => [
+                'purchase_id' => $purchase->id
+            ],
         ]);
 
 

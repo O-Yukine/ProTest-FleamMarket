@@ -54,7 +54,27 @@
 3. 開発者ページより API キーを取得し、env.に追加
 4. stripe ライブラリのインストール  
    `composer require stripe/stripe-php`
-5. テストは以下の情報を使用してください
+
+## stripe CLI (webhook 開発用)
+
+1. Stripe CLI をインストール  
+   macOS(Homebrew)
+
+brew install stripe/stripe-cli
+
+Windows / Linux は公式サイト参照 2.ログイン
+
+stripe login
+
+3. Webhook リッスン
+
+stripe listen --forward-to http://localhost/stripe/webhook
+
+4. seakretKey を.env に追加
+
+5. webhook からの支払い完了のイベントを受け取るには、このリッスンは常に開いておいてください
+
+##テストカード/コンビニ決済情報
 
 #### カード払い
 

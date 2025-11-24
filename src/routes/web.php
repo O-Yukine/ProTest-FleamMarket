@@ -7,6 +7,7 @@ use App\Http\Controllers\ItemController;
 use App\Http\Controllers\CommentController;
 use App\Http\Controllers\LikeController;
 use App\Http\Controllers\PurchaseController;
+use App\Http\Controllers\StripeWebhookController;
 use App\Http\Controllers\VerifyEmailController;
 
 
@@ -53,3 +54,5 @@ Route::middleware('auth', 'verified')->prefix('purchase')->group(function () {
     Route::get('/address/{item_id}', [PurchaseController::class, 'showShippingAddress']);
     Route::post('/address/{item_id}', [PurchaseController::class, 'updateShippingAddress']);
 });
+
+Route::post('/stripe/webhook', [StripeWebhookController::class, 'handle']);
