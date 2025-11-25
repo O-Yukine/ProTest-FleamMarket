@@ -62,7 +62,8 @@
 
 brew install stripe/stripe-cli
 
-Windows / Linux は公式サイト参照 2.ログイン
+Windows / Linux は公式サイト参照  
+2. ログイン
 
 stripe login
 

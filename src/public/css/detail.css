@@ -74,8 +74,8 @@
 
 .category-list {
     display: flex;
-    flex-wrap: wrap; /* 折り返しを有効化 */
-    gap: 8px; /* チップ同士の隙間 */
+    flex-wrap: wrap;
+    gap: 8px;
 }
 
 .category-chips {

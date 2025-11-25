@@ -63,4 +63,9 @@ class Product extends Model
 
         return $query;
     }
+
+    public function getIsSoldAttribute()
+    {
+        return $this->purchases->contains('status', 'paid');
+    }
 }
