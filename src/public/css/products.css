@@ -48,7 +48,7 @@
 .card-info {
     display: flex;
     align-items: center;
-    gap: 10px; /* 名前とsoldの間の余白 */
+    gap: 10px;
     margin-top: 5px;
 }
 .sold-label {
