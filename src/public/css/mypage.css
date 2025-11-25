@@ -16,6 +16,7 @@
     width: 150px;
     height: 150px;
     border-radius: 100%;
+    background-color: rgb(208, 204, 204);
 }
 .mypage__profile h3 {
     font-size: 24px;
@@ -33,11 +34,11 @@
 
 .products_nav {
     display: flex;
-    align-items: flex-end; /* 下端に寄せる */
+    align-items: flex-end;
     height: 80px;
     border-bottom: 1px solid #000;
-    gap: 40px; /* aタグ同士の余白（お好みで） */
-    padding-left: 100px; /* 余白が入っていたら削除 */
+    gap: 40px;
+    padding-left: 100px;
 }
 .products_nav a {
     text-decoration: none;
@@ -54,7 +55,7 @@
 .products__list {
     display: flex;
     flex-wrap: wrap;
-    margin: 15px;
+    margin: 15px 0px 15px 100px;
     width: 100%;
     gap: 10px;
 }
@@ -64,6 +65,8 @@
 }
 .card img {
     width: 80%;
+    height: 200px;
+    object-fit: cover;
 }
 .card-info {
     display: flex;

@@ -132,6 +132,9 @@
     display: flex;
     align-items: center;
 }
+.price-input input {
+    padding-left: 30px;
+}
 .price-symbol {
     position: absolute;
     left: 10px;

@@ -34,19 +34,18 @@
                         </div>
                     @endforeach
                 @endif
-
                 @if ($tab === 'buy')
                     @foreach ($purchased_items as $purchase)
                         <div class="card">
                             {{-- <img src="{{ url($purchase->product->product_image) }}" alt="{{ $purchase->product->name }}"> --}}
-                            <img src="{{ asset('storage/product_images/' . $purchase->product->product_image) }}" <div
-                                class="card-info">
-                            <p>{{ $purchase->product->name }}</p>
+                            <img src="{{ asset('storage/product_images/' . $purchase->product->product_image) }}" <div>
+                            <div class="card-info">
+                                <p>{{ $purchase->product->name }}</p>
+                            </div>
                         </div>
+                    @endforeach
+                @endif
             </div>
-            @endforeach
-            @endif
-
         </div>
     </div>
     </div>
