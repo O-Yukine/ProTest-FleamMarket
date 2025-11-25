@@ -89,8 +89,7 @@
                             {{ $message }}
                         @enderror
                     </div>
-                    <textarea name="comment">
-                    </textarea>
+                    <textarea name="comment"> </textarea>
                     <div class="comment__button">
                         <button class="comment__button-submit">コメントを送信する</button>
                     </div>
