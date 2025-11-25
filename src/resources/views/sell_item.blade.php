@@ -15,10 +15,10 @@
                     <div class="form__group-title"><span>商品画像</span>
                     </div>
                     <div class="form__group-image">
-                        <label class="custom-file-input">
+                        <label for="product_image" class="custom-file-input">
                             <span class="file-text">画像を選択する</span>
-                            <input type="file" name="product_image" id="product_image">
                         </label>
+                        <input type="file" name="product_image" id="product_image">
                     </div>
                     <div class="form__error">
                         @error('product_image')

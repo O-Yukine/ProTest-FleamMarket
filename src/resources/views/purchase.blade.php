@@ -15,7 +15,7 @@
                     </div>
                     <div class="order-information">
                         <h3>{{ $product->name }}</h3>
-                        <p>¥{{ $product->price }}</p>
+                        <p>¥{{ number_format($product->price) }}</p>
                     </div>
                 </div>
                 <div class="payment-type">
@@ -50,13 +50,13 @@
                                 {{ $message }}
                             @enderror
                         </div>
-                        <span><input type="hidden" name="address"
+                        <p><input type="hidden" name="address"
                                 value="{{ $shipping_address['address'] ?? $user->profile->address }}">
-                            {{ $shipping_address['address'] ?? $user->profile->address }}</span>
+                            {{ $shipping_address['address'] ?? $user->profile->address }}</p>
 
-                        <span><input type="hidden" name="building"
+                        <p><input type="hidden" name="building"
                                 value="{{ $shipping_address['building'] ?? ($user->profile->building ?? '') }}">
-                            {{ $shipping_address['building'] ?? ($user->profile->building ?? '') }}</span>
+                            {{ $shipping_address['building'] ?? ($user->profile->building ?? '') }}</p>
                     </div>
                 </div>
             </div>
@@ -64,7 +64,7 @@
                 <table class="total-price">
                     <tr>
                         <th>商品代金</th>
-                        <td>¥{{ $product->price }}</td>
+                        <td>¥{{ number_format($product->price) }}</td>
                     </tr>
                     <tr>
                         <th>支払い方法</th>

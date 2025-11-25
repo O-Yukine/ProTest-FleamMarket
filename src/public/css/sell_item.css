@@ -34,9 +34,10 @@
     position: relative;
 }
 
-.custom-file-input input[type="file"] {
+#product_image {
     display: none;
 }
+
 .file-text {
     color: #e60023;
     border: 1px solid #e60023;
