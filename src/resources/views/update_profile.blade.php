@@ -14,10 +14,10 @@
             @csrf
             <div class="profile-image">
                 <img src="{{ $profile->profile_image ? asset('storage/profile_images/' . $profile->profile_image) : '' }}">
-                <label class="custom-file-input">
+                <label class="custom-file-input" for="profile_image">
                     <span class="file-text">画像を選択する</span>
-                    <input type="file" name="profile_image" id="profile_image">
                 </label>
+                <input type="file" name="profile_image" id="profile_image">
             </div>
             <div class="profile__contents">
                 <div class="input__gropu">

@@ -27,13 +27,14 @@
     border-radius: 100%;
     margin-right: 30px;
 }
+#profile_image {
+    display: none;
+}
 .custom-file-input {
     cursor: pointer;
     position: relative;
 }
-.custom-file-input input[type="file"] {
-    display: none;
-}
+
 .file-text {
     color: #e60023;
     border: 1px solid #e60023;
