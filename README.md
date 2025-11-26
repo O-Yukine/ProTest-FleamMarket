@@ -12,23 +12,35 @@
 
 ### Laravel 環境構築
 
-1. PHP コンテナに入る  
+1. PHP コンテナに入る
+
    `docker-compose exec php bash`
-2. Composer パッケージをインストール  
+
+2. Composer パッケージをインストール
+
    `compose install`
-3. 環境設定ファイルをコピー  
+
+3. 環境設定ファイルをコピー
+
    `cp .env.example .env`
+
 4. .env ファイルを編集
+
    `DB_HOST=mysql`  
    `DB_DATABASE=laravel_db`  
    `DB_USERNAME=laravel_user`  
    `DB_PASSWORD=laravel_pass`
 
-5. アプリケーションキーの作成  
+5. アプリケーションキーの作成
+
    `php artisan key:generate`
-6. マイグレーションの実行  
+
+6. マイグレーションの実行
+
    `php artisan migrate`
-7. シーディングの実行  
+
+7. シーディングの実行
+
    `php artisan db:seed`
 
 ## ユーザー登録時のメール認証システムの導入
@@ -55,27 +67,29 @@
 4. stripe ライブラリのインストール  
    `composer require stripe/stripe-php`
 
-## stripe CLI (webhook 開発用)
+### stripe CLI (webhook 開発用)
 
-1. Stripe CLI をインストール  
+1. Stripe CLI をインストール
+
    macOS(Homebrew)
 
-brew install stripe/stripe-cli
+   `brew install stripe/stripe-cli`
 
-Windows / Linux は公式サイト参照  
+   Windows / Linux は公式サイト参照
+
 2. ログイン
 
-stripe login
+   `stripe login`
 
 3. Webhook リッスン
 
-stripe listen --forward-to http://localhost/stripe/webhook
+   `stripe listen --forward-to http://localhost/stripe/webhook`
 
-4. seakretKey を.env に追加
+4. secretKey を.env に追加
 
 5. webhook からの支払い完了のイベントを受け取るには、このリッスンは常に開いておいてください
 
-##テストカード/コンビニ決済情報
+### テストカード/コンビニ決済情報
 
 #### カード払い
 

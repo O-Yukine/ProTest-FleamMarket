@@ -15,7 +15,7 @@ class PurchaseController extends Controller
 {
     public function showOrder($item_id)
     {
-        $product = Product::find($item_id);
+        $product = Product::findOrFail($item_id);
         $user = User::with('profile')->find(auth()->id());
 
         $shipping_address = session('shipping_address');
@@ -35,7 +35,7 @@ class PurchaseController extends Controller
             'building' => $request->building
         ]);
 
-        $product = Product::find($item_id);
+        $product = Product::findOrFail($item_id);
         Stripe::setApiKey(env('STRIPE_SECRET'));
 
         $method = $request->payment_method === 'credit' ? ['card'] : ['konbini'];
