@@ -14,13 +14,12 @@ class ItemController extends Controller
 {
     public function index(Request $request)
     {
-        $tab = $request->query('tab', '');
-
+        $keyword = $request->input('keyword', session('keyword', ''));
         if ($request->has('keyword')) {
-            session(['keyword' => $request->keyword]);
-        } else {
-            $keyword = session('keyword', '');
+            session(['keyword' => $keyword]);
         }
+
+        $tab = $request->query('tab', '');
 
         $keyword = $request->input('keyword', session('keyword', ''));
 
@@ -34,11 +33,18 @@ class ItemController extends Controller
             } else {
                 $products = collect();
             }
-        } else {
+
+            return view('products', compact('products', 'tab', 'keyword'));
+        }
+
+        if ($tab === 'recommended') {
+
+            $query = Product::with('purchases')->ProductSearch($keyword);
+
             if (auth()->check()) {
-                $products = Product::with('purchases')->where('user_id', '<>', auth()->id())->ProductSearch($keyword)->get();
+                $products = $query->where('user_id', '<>', auth()->id())->get();
             } else {
-                $products = Product::with('purchases')->ProductSearch($keyword)->get();
+                $products = $query->get();
             }
         }
 
@@ -47,7 +53,12 @@ class ItemController extends Controller
 
     public function showDetail($item_id)
     {
-        $product = Product::with(['categories', 'condition', 'comments', 'likedBy'])->findOrFail($item_id);
+        $product = Product::with([
+            'categories',
+            'condition',
+            'comments.user.profile',
+            'likedBy'
+        ])->findOrFail($item_id);
 
         return view('detail', compact('product'));
     }

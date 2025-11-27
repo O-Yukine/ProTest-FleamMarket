@@ -30,9 +30,10 @@
                         <p data-like-count="{{ $product->likedBy->count() }}">{{ $product->likedBy->count() }}</p>
 
                     </form>
+                    @php $commentCount = $product->comments->count();@endphp
                     <div class="comment-icon">
                         <img src="{{ asset('images/comment.png') }}" alt="/comment_icon">
-                        <p>{{ $product->comments->count() }}</p>
+                        <p>{{ $commentCount }}</p>
                     </div>
                 </div>
                 <form class="form.order" action="/purchase/{{ $product->id }}" method="get">
@@ -59,7 +60,7 @@
                 </div>
             </div>
             <div class="product__comments">
-                <h3>コメント({{ $product->comments->count() }})
+                <h3>コメント({{ $commentCount }})
                 </h3>
                 @isset($product->comments)
                     @foreach ($product->comments as $comment)
@@ -81,7 +82,7 @@
                             {{ $message }}
                         @enderror
                     </div>
-                    <textarea name="comment"> </textarea>
+                    <textarea name="comment"></textarea>
                     <div class="comment__button">
                         <button class="comment__button-submit">コメントを送信する</button>
                     </div>
