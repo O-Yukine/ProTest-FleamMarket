@@ -73,18 +73,18 @@ class ProductTest extends TestCase
 
         $user1 = User::factory()->create();
         $product = Product::factory()->create([
-            'name' => '商品１',
+            'name' => 'ショルダーバッグ',
             'user_id' => $user1->id,
         ]);
 
         $user2 = User::factory()->create();
 
         $this->actingAs($user1);
-        $response = $this->get('/?tab=reccommanded');
+        $response = $this->get('/?tab=recommended');
         $response->assertDontSee($product->name);
 
         $this->actingAs($user2);
-        $response = $this->get('/?tab=reccommanded');
+        $response = $this->get('/?tab=recommended');
         $response->assertSee($product->name);
     }
 }

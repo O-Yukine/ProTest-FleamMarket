@@ -95,6 +95,6 @@ class RegisterTest extends TestCase
 
         $this->assertAuthenticated();
 
-        $response->assertRedirect('/mypage/profile');
+        $response->assertRedirect('email/verify');
     }
 }

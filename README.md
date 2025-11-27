@@ -64,8 +64,6 @@
 1. stripe アカウントを作る
 2. ダッシュボードの設定よりコンビニ決済を有効にする
 3. 開発者ページより API キーを取得し、env.に追加
-4. stripe ライブラリのインストール  
-   `composer require stripe/stripe-php`
 
 ### stripe CLI (webhook 開発用)
 
@@ -73,7 +71,7 @@
 
    macOS(Homebrew)
 
-   `brew install stripe/stripe-cli`
+   `brew install stripe/stripe-cli` codechacke
 
    Windows / Linux は公式サイト参照
 
