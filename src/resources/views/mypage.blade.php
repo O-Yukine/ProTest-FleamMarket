@@ -7,7 +7,8 @@
     <div class="mypage">
         <div class="mypage-header">
             <div class="mypage__profile">
-                <img src="{{ $profile->profile_image ? asset('storage/profile_images/' . $profile->profile_image) : '' }}">
+                <img src="{{ $profile->profile_image ? asset('storage/profile_images/' . $profile->profile_image) : asset('images/default_profile.png') }}"
+                    alt="プロフィール写真">
                 <h3>{{ $user->name }}</h3>
             </div>
             <div class="mypage__update">
