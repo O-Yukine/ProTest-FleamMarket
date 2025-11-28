@@ -68,7 +68,7 @@ class ProductTest extends TestCase
         $response->assertSee('sold');
     }
 
-    public function test_mySellingItem_inNot_onTheList()
+    public function test_mySellingItem_inNot_onRecommendedPage()
     {
 
         $user1 = User::factory()->create();
