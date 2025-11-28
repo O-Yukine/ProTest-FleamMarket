@@ -48,11 +48,8 @@ class MypageController extends Controller
         $purchased_items = collect();
 
         if ($tab == 'sell') {
-
             $sell_items = Product::with('purchases')->where('user_id', $user->id)->get();
-        }
-
-        if ($tab == 'buy') {
+        } elseif ($tab == 'buy') {
             $purchased_items = Purchase::with('product')
                 ->where('user_id', $user->id)
                 ->where('status', 'paid')

@@ -73,7 +73,7 @@
                     </tr>
                 </table>
                 <div class="order__submit">
-                    <button class="order__submit-button">
+                    <button type="submit" class="order__submit-button">
                         購入する</button>
                 </div>
         </form>

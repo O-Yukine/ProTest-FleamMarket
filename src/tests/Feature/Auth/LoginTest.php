@@ -29,7 +29,7 @@ class LoginTest extends TestCase
         $response->assertSessionHasErrors(['email' => 'メールアドレスを入力してください',]);
     }
 
-    public function test_Login_validation_password_is_empty()
+    public function test_login_validation_password_is_empty()
     {
         $response = $this->post('/login', [
             'email' => 'test@example.com',
@@ -39,7 +39,7 @@ class LoginTest extends TestCase
         $response->assertSessionHasErrors(['password' => 'パスワードを入力してください',]);
     }
 
-    public function test_Login_validation_information_notmatch()
+    public function test_login_validation_information_notmatch()
     {
         $user = User::factory()->create([
             'name' => 'test1',

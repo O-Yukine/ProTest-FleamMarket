@@ -25,7 +25,7 @@
                 @enderror
             </div>
             <div class="profile__contents">
-                <div class="input__gropu">
+                <div class="input__group">
                     <div class="input__group-title">
                         <p>ユーザー名</p>
                     </div>
@@ -38,12 +38,12 @@
                         @enderror
                     </div>
                 </div>
-                <div class="input__gropu">
+                <div class="input__group">
                     <div class="input__group-title">
                         <p>郵便番号</p>
                     </div>
                     <div class="input__group-input">
-                        <input type="text" name="post_code" value={{ old('post_code', $profile->post_code) }}>
+                        <input type="text" name="post_code" value="{{ old('post_code', $profile->post_code) }}">
                     </div>
                     <div class="form__error">
                         @error('post_code')
@@ -51,7 +51,7 @@
                         @enderror
                     </div>
                 </div>
-                <div class="input__gropu">
+                <div class="input__group">
                     <div class="input__group-title">
                         <p>住所</p>
                     </div>
@@ -64,7 +64,7 @@
                         @enderror
                     </div>
                 </div>
-                <div class="input__gropu">
+                <div class="input__group">
                     <div class="input__group-title">
                         <p>建物名</p>
                     </div>

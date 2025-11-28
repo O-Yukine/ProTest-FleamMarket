@@ -19,34 +19,23 @@ class ItemController extends Controller
             session(['keyword' => $keyword]);
         }
 
-        $tab = $request->query('tab', '');
-
-        $keyword = $request->input('keyword', session('keyword', ''));
-
-        if ($tab === '') {
-            $tab = empty($keyword) ? (auth()->check() ? 'mylist' : 'recommended') : 'recommended';
-        }
+        $tab = $request->query('tab') ?: (empty($keyword) ? (auth()->check() ? 'mylist' : 'recommended') : 'recommended');
 
         if ($tab === 'mylist') {
-            if (auth()->check()) {
-                $products = auth()->user()->likes()->with('purchases')->ProductSearch($keyword)->get();
-            } else {
-                $products = collect();
-            }
+            $products = auth()->check()
+                ? auth()->user()->likes()->with('purchases')->ProductSearch($keyword)->get()
+                : collect();
 
             return view('products', compact('products', 'tab', 'keyword'));
         }
 
-        if ($tab === 'recommended') {
+        $query = Product::with('purchases')->ProductSearch($keyword);
 
-            $query = Product::with('purchases')->ProductSearch($keyword);
-
-            if (auth()->check()) {
-                $products = $query->where('user_id', '<>', auth()->id())->get();
-            } else {
-                $products = $query->get();
-            }
+        if (auth()->check()) {
+            $query->where('user_id', '<>', auth()->id());
         }
+
+        $products = $query->get();
 
         return view('products', compact('products', 'tab', 'keyword'));
     }

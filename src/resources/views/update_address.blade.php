@@ -8,10 +8,10 @@
         <div class="address__title">
             <h2>住所の変更</h2>
         </div>
-        <div class="adress__contents">
-            <form class="from" action="/purchase/address/{{ $item_id }}" method="post">
+        <div class="address__contents">
+            <form class="form" action="/purchase/address/{{ $item_id }}" method="post">
                 @csrf
-                <div class="form__gropu">
+                <div class="form__group">
                     <div class="form__group-title">
                         <span>郵便番号</span>
                     </div>
@@ -24,7 +24,7 @@
                         @enderror
                     </div>
                 </div>
-                <div class="form__gropu">
+                <div class="form__group">
                     <div class="form__group-title">
                         <span>住所</span>
                     </div>
@@ -37,7 +37,7 @@
                         @enderror
                     </div>
                 </div>
-                <div class="form__gropu">
+                <div class="form__group">
                     <div class="form__group-title">
                         <span>建物名</span>
                     </div>

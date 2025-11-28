@@ -27,10 +27,10 @@ class MylistTest extends TestCase
         ]);
 
         $this->actingAs($user);
-        $responce = $this->get('/?tab=mylist');
+        $response = $this->get('/?tab=mylist');
 
-        $responce->assertSee($likedItem->name);
-        $responce->assertDontSee($unlikedItem->name);
+        $response->assertSee($likedItem->name);
+        $response->assertDontSee($unlikedItem->name);
     }
 
     public function test_purchased_item_shows_sold_tag_in_mylist()

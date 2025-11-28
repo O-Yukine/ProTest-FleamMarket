@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="jp">
 
 <head>
     <meta charset="UTF-8">
@@ -30,7 +30,7 @@
                 </div>
                 <form class="form" method="POST" action="{{ route('verification.send') }}">
                     @csrf
-                    <button class="verification-resend__button">認証メールを再送する</button>
+                    <button type="submit" class="verification-resend__button">認証メールを再送する</button>
                 </form>
             </div>
         </div>
