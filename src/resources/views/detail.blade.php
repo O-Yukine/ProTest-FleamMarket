@@ -65,8 +65,8 @@
                 @isset($product->comments)
                     @foreach ($product->comments as $comment)
                         <div class="comment__title">
-                            <img src="{{ $comment->user->profile->profile_image ? asset('storage/profile_images/' . $comment->user->profile->profile_image) : asset('images/default_profile.png') }}"
-                                alt="プロフィール写真">
+                            <img
+                                src="{{ $comment->user->profile->profile_image ? asset('storage/profile_images/' . $comment->user->profile->profile_image) : asset('images/default_profile.png') }}">
                             {{ $comment->user->name }}
                         </div>
                         <div class="comment__contents">

@@ -30,7 +30,7 @@
                         <p>ユーザー名</p>
                     </div>
                     <div class="input__group-input">
-                        <input type="text" name="name" value="{{ $user->name }}">
+                        <input type="text" name="name" value="{{ old('name', $user->name) }}">
                     </div>
                     <div class="form__error">
                         @error('name')
@@ -43,7 +43,7 @@
                         <p>郵便番号</p>
                     </div>
                     <div class="input__group-input">
-                        <input type="text" name="post_code" value={{ $profile->post_code }}>
+                        <input type="text" name="post_code" value={{ old('post_code', $profile->post_code) }}>
                     </div>
                     <div class="form__error">
                         @error('post_code')
@@ -56,7 +56,7 @@
                         <p>住所</p>
                     </div>
                     <div class="input__group-input">
-                        <input type="text" name="address" value="{{ $profile->address }}">
+                        <input type="text" name="address" value="{{ old('address', $profile->address) }}">
                     </div>
                     <div class="form__error">
                         @error('address')
@@ -69,7 +69,7 @@
                         <p>建物名</p>
                     </div>
                     <div class="input__group-input">
-                        <input type="text" name="building" value="{{ $profile->building ?? '' }}">
+                        <input type="text" name="building" value="{{ old('building', $profile->building ?? '') }}">
                     </div>
                 </div>
                 <div class="update-profile__button">
