@@ -6,7 +6,7 @@
 
 1. リポジトリをクローン
 
-   `git clone git@github.com:`
+   `git clone git@github.com:O-Yukine/Mock-Projrct-FleaMarketApp.git`
 
 2. Docker アプリを立ち上げる
 
@@ -30,10 +30,10 @@
 
 4. .env ファイルを編集
 
-   `DB_HOST=mysql`  
-   `DB_DATABASE=laravel_db`  
-   `DB_USERNAME=laravel_user`  
-   `DB_PASSWORD=laravel_pass`
+   DB_HOST=mysql
+   DB_DATABASE=laravel_db  
+   DB_USERNAME=laravel_user  
+   DB_PASSWORD=laravel_pass
 
 5. アプリケーションキーの作成
 
@@ -53,7 +53,8 @@
 
 1. mailtrap のアカウントを作成
 
-2. mailtrap より SMTP を取得して、以下の情報を.env ファイルに追加　
+2. mailtrap より SMTP を取得して、以下の情報を.env ファイルに追加
+
    MAIL_MAILER=  
    MAIL_HOST=  
    MAIL_PORT=
@@ -69,12 +70,11 @@
 
 1. Stripe アカウントの作成
 
-2. API キーを取得して `.env` に設定
+2. API キーを取得して .env に設定
 
-   Stripe ダッシュボード →「開発者」→「API キー」より取得し、`.env` に追加
+   Stripe ダッシュボード →「開発者」→「API キー」より取得し、.env に追加
 
    STRIPE_KEY=pk_test_xxxxx
-
    STRIPE_SECRET=sk_test_xxxxx
 
 3. コンビニ決済を有効化
@@ -97,9 +97,9 @@
 
    `stripe listen --forward-to http://localhost/stripe/webhook`
 
-7. 表示される Webhook Secret を `.env` に追加：
+7. 表示される Webhook Secret を .env に追加：
 
-   `STRIPE_WEBHOOK_SECRET=whsec_xxxxx`
+   STRIPE_WEBHOOK_SECRET=whsec_xxxxx
 
 8. テスト用カード・コンビニ決済情報
 
@@ -162,12 +162,12 @@
 
 4.  .env.testing を編集
 
-    `APP_ENV=test`  
-    `APP_KEY=`
+    APP_ENV=test  
+    APP_KEY=
 
-    `DB_DATABASE=laravel_test`  
-    `DB_USERNAME=root`  
-    `DB_PASSWORD=root`
+    DB_DATABASE=laravel_test  
+    DB_USERNAME=root  
+    DB_PASSWORD=root
 
 5.  テスト用アプリケーションキーの作成
 
@@ -202,5 +202,5 @@
 
 ## URL
 
-- 開発環境：http://localhost/
-- phpMyAdmin::http://localhost:8080/
+- 開発環境: http://localhost/
+- phpMyAdmin: http://localhost:8080/
