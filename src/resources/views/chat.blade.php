@@ -12,6 +12,7 @@
         <div class="chat-right-contents">
             <div class="chat-title"><img src="" alt="ユーザープロフィール写真">
                 <h1>ユーザー名さんとの取引画面</h1>
+                <a href="">取引を完了する</a>
             </div>
             <div class="chat-product"><img src="" alt="商品画像">
                 <h2>商品名</h2>
