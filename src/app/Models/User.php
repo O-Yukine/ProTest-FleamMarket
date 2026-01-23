@@ -11,6 +11,9 @@ use App\Models\Profile;
 use App\Models\Product;
 use App\Models\Purchase;
 use App\Models\Comment;
+use App\Models\Message;
+use App\Models\Review;
+use App\Models\Chat;
 
 class User extends Authenticatable implements MustVerifyEmail
 {
@@ -68,6 +71,34 @@ class User extends Authenticatable implements MustVerifyEmail
     {
         return $this->belongsToMany(Product::class, 'user_product_like');
     }
+    public function buyerChats()
+    {
+        return $this->hasMany(Chat::class, 'buyer_id');
+    }
+    public function sellerChats()
+    {
+        return $this->hasMany(Chat::class, 'seller_id');
+    }
+    public function messagesSend()
+    {
+        return $this->hasMany(Message::class, 'sender_id');
+    }
+
+    public function messagesReceived()
+    {
+        return $this->hasMany(Message::class, 'receiver_id');
+    }
+
+    public function reviewsWritten()
+    {
+        return $this->hasMany(Review::class, 'reviewer_id');
+    }
+
+    public function reviewsReceived()
+    {
+        return $this->hasMany(Review::class, 'reviewee_id');
+    }
+
 
     public function sendEmailVerificationNotification()
     {
