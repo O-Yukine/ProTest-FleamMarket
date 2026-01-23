@@ -19,6 +19,7 @@
             <div class="products_nav">
                 <a href="/mypage?page=sell" class="{{ $tab === 'sell' ? 'active' : '' }}">出品した商品</a>
                 <a href="/mypage?page=buy" class="{{ $tab === 'buy' ? 'active' : '' }}">購入した商品</a>
+                <a href="/mypage?page=transaction" class="{{ $tab === 'buy' ? 'active' : '' }}">取引中の商品</a>
             </div>
             <div class="products__list">
                 @if ($tab === 'sell')
@@ -43,6 +44,18 @@
                             </div>
                         </div>
                     @endforeach
+                @endif
+                @if ($tab === 'transaction')
+                    <p>取引中の商品表示</p>
+                    {{-- @foreach ($purchased_items as $purchase)
+                        <div class="card">
+                            <img
+                                src="{{ asset('storage/product_images/' . $purchase->product->product_image) }}"alt="商品画像">
+                            <div class="card-info">
+                                <p>{{ $purchase->product->name }}</p>
+                            </div>
+                        </div>
+                    @endforeach --}}
                 @endif
             </div>
         </div>
