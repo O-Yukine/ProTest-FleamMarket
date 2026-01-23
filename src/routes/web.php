@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\ChatController;
 use App\Http\Controllers\MypageController;
 use App\Http\Controllers\ItemController;
 use App\Http\Controllers\CommentController;
@@ -43,6 +44,7 @@ Route::middleware('auth', 'verified')->prefix('mypage')->group(function () {
     Route::get('/', [MypageController::class, 'showMypage']);
     Route::get('/profile', [MypageController::class, 'showProfile']);
     Route::post('/profile', [MypageController::class, 'updateProfile']);
+    Route::get('/profile/chat', [ChatController::class, 'showChatPage']);
 });
 
 Route::post('/item/{item_id}/comment', [CommentController::class, 'makeComment'])->middleware('auth', 'verified');
