@@ -19,7 +19,7 @@
             <div class="products_nav">
                 <a href="/mypage?page=sell" class="{{ $tab === 'sell' ? 'active' : '' }}">出品した商品</a>
                 <a href="/mypage?page=buy" class="{{ $tab === 'buy' ? 'active' : '' }}">購入した商品</a>
-                <a href="/mypage?page=transaction" class="{{ $tab === 'buy' ? 'active' : '' }}">取引中の商品</a>
+                <a href="/mypage?page=transaction" class="{{ $tab === 'transaction' ? 'active' : '' }}">取引中の商品</a>
             </div>
             <div class="products__list">
                 @if ($tab === 'sell')
