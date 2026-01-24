@@ -14,7 +14,7 @@ class DatabaseSeeder extends Seeder
      */
     public function run()
     {
-        \App\Models\User::factory()->count(5)->has(Profile::factory())->create();
+        \App\Models\User::factory()->count(3)->has(Profile::factory())->create();
         $this->call(ConditionTableSeeder::class);
         $this->call(CategoryTableSeeder::class);
         $this->call(ProductTableSeeder::class);

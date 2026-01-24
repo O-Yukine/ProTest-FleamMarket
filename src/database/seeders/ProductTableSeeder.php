@@ -15,9 +15,10 @@ class ProductTableSeeder extends Seeder
      */
     public function run()
     {
-        $userIds = User::inRandomOrder()->take(5)->pluck('id')->toArray();
+        $user1 = User::first();
+        $user2 = User::skip(1)->first();
 
-        $products = [
+        $productsForUser1 = [
             [
                 'name' => '腕時計',
                 'price' => 15000,
@@ -67,7 +68,24 @@ class ProductTableSeeder extends Seeder
                 'categories' => [2],
 
             ],
+        ];
 
+        foreach ($productsForUser1 as $item) {
+
+            $product = $user1->products()->create([
+                'name' => $item['name'],
+                'price' => $item['price'],
+                'brand' => $item['brand'],
+                'product_image' => $item['product_image'],
+                'content' => $item['content'],
+                'condition_id' => $item['condition_id'],
+            ]);
+
+            $product->categories()->attach($item['categories']);
+        };
+
+
+        $productsForUser2 = [
             [
                 'name' => 'マイク',
                 'price' => 8000,
@@ -119,18 +137,15 @@ class ProductTableSeeder extends Seeder
             ],
         ];
 
-        foreach ($products as $item) {
+        foreach ($productsForUser2 as $item) {
 
-            $userId = $userIds[array_rand($userIds)];
-
-            $product = Product::create([
+            $product = $user2->products()->create([
                 'name' => $item['name'],
                 'price' => $item['price'],
                 'brand' => $item['brand'],
                 'product_image' => $item['product_image'],
                 'content' => $item['content'],
                 'condition_id' => $item['condition_id'],
-                'user_id' => $userId,
             ]);
 
             $product->categories()->attach($item['categories']);

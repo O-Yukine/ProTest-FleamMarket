@@ -9,6 +9,8 @@ use App\Models\Category;
 use App\Models\Condition;
 use App\Models\Purchase;
 use App\Models\Comment;
+use App\Models\Chat;
+
 
 class Product extends Model
 {
@@ -52,6 +54,11 @@ class Product extends Model
     public function likedBy()
     {
         return $this->belongsToMany(User::class, 'user_product_like');
+    }
+
+    public function chat()
+    {
+        return $this->hasOne(Chat::class);
     }
 
     public function scopeProductSearch($query, $keyword)
