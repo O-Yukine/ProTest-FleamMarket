@@ -11,7 +11,6 @@ class ChatController extends Controller
 {
     public function showChatRoom($chat_id)
     {
-
         $chat = Chat::with(['buyer', 'seller', 'product', 'messages.sender'])
             ->findOrFail($chat_id);
 

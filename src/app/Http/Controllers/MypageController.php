@@ -7,6 +7,7 @@ use App\Http\Requests\ProfileRequest;
 use App\Models\Product;
 use App\Models\Purchase;
 use App\Models\Chat;
+use App\Models\Message;
 
 
 
@@ -70,7 +71,12 @@ class MypageController extends Controller
                 ->get();
         }
 
-        return view('mypage', compact('user', 'profile', 'sell_items', 'purchased_items', 'transaction_items', 'tab'));
+        $unReadCount = Message::where('receiver_id', $user->id)
+            ->where('is_read', false)
+            ->count();
+
+
+        return view('mypage', compact('user', 'profile', 'sell_items', 'purchased_items', 'transaction_items', 'unReadCount', 'tab'));
     }
 
     public function redirectItem($item_id)
