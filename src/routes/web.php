@@ -49,6 +49,7 @@ Route::middleware('auth', 'verified')->prefix('mypage')->group(function () {
 
 Route::middleware(['auth', 'verified'])->group(function () {
     Route::get('/chat-room/{chat_id}', [ChatController::class, 'showChatRoom']);
+    Route::post('/chat-room/{chat_id}', [ChatController::class, 'sendMessage']);
 });
 
 Route::post('/item/{item_id}/comment', [CommentController::class, 'makeComment'])->middleware('auth', 'verified');

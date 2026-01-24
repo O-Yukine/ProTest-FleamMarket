@@ -19,7 +19,7 @@ class CreateMessagesTable extends Migration
             $table->foreignId('sender_id')->constrained('users')->cascadeOnDelete();
             $table->foreignId('receiver_id')->constrained('users')->cascadeOnDelete();
             $table->text('content');
-            $table->string('img')->nullable();
+            $table->string('chat_image')->nullable();
             $table->boolean('is_read')->default(false);
             $table->timestamps();
         });

@@ -38,3 +38,8 @@
     border-radius: 16px;
     padding: 10px;
 }
+
+.chat-contents__left img,
+.chat-contents__right img {
+    width: 10%;
+}
