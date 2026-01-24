@@ -11,6 +11,8 @@ class ChatController extends Controller
 {
     public function showChatRoom($chat_id)
     {
+        $user = auth()->user();
+
         $chat = Chat::with([
             'buyer',
             'seller',
@@ -20,13 +22,11 @@ class ChatController extends Controller
             ->findOrFail($chat_id);
 
         $chat->messages()
-            ->where('receiver_id', auth()->id())
+            ->where('receiver_id', $user->id)
             ->where('is_read', false)
             ->update(['is_read' => true]);
 
         $messages = $chat->messages()->orderBy('created_at')->get();
-
-        $user = auth()->user();
 
         $partner = $chat->seller_id === $user->id ? $chat->buyer : $chat->seller;
 
@@ -35,7 +35,7 @@ class ChatController extends Controller
             ->where(function ($q) use ($user) {
                 $q->where('buyer_id', $user->id)
                     ->orWhere('seller_id', $user->id);
-            })->where('product_id', '!=', $chat->product->id)
+            })->where('id', '!=', $chat->id)
             ->orderByDesc('last_message_at')
             ->get();
 
