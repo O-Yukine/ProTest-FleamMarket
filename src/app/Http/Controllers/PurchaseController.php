@@ -8,6 +8,7 @@ use App\Http\Requests\AddressRequest;
 use App\Models\Product;
 use App\Models\User;
 use App\Models\Purchase;
+use App\Models\Chat;
 use Stripe\Checkout\Session;
 use Stripe\Stripe;
 
@@ -25,8 +26,8 @@ class PurchaseController extends Controller
 
     public function completeOrder(Purchaserequest $request, $item_id)
     {
-        $purchase =  Purchase::create([
-            'status' => 'pending',
+        Purchase::create([
+            'status' => 'paid',
             'user_id' => auth()->id(),
             'product_id' => $item_id,
             'payment_method' => $request->payment_method,
@@ -39,30 +40,32 @@ class PurchaseController extends Controller
         Stripe::setApiKey(env('STRIPE_SECRET'));
 
         $method = $request->payment_method === 'credit' ? ['card'] : ['konbini'];
-        $buyer_id = auth()->id();
-        $seller_id = $product->user_id;
 
-        $checkout = Session::create([
-            'payment_method_types' => $method,
-            'line_items' => [[
-                'price_data' => [
-                    'currency' => 'jpy',
-                    'unit_amount' => intval($product->price),
-                    'product_data' => [
-                        'name' => $product->name,
+        $checkout = Session::create(
+            [
+                'payment_method_types' => $method,
+                'line_items' => [[
+                    'price_data' => [
+                        'currency' => 'jpy',
+                        'unit_amount' => intval($product->price),
+                        'product_data' => [
+                            'name' => $product->name,
+                        ],
                     ],
-                ],
-                'quantity' => 1,
-            ]],
-            'mode' => 'payment',
-            'success_url' => url('/') . '?message=' . urlencode('決済が完了しました'),
-            'metadata' => [
-                'purchase_id' => $purchase->id,
-                'product_id' => $item_id,
-                'buyer_id' => $buyer_id,
-                'seller_id' => $seller_id
+                    'quantity' => 1,
+                ]],
+                'mode' => 'payment',
+                'success_url' => url('/') . '?message=' . urlencode('決済が完了しました')
             ],
+        );
+
+        Chat::create([
+            'product_id' => $item_id,
+            'buyer_id' => auth()->id(),
+            'seller_id' => $product->user_id,
+            'status' => 'open'
         ]);
+
 
         return redirect($checkout->url);
     }
