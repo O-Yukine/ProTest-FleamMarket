@@ -10,20 +10,40 @@
             <h2>その他の取引</h2>
         </div>
         <div class="chat-right-contents">
-            <div class="chat-title"><img src="" alt="ユーザープロフィール写真">
-                <h1>ユーザー名さんとの取引画面</h1>
+            <div class="chat-title">
+                <img src="{{ $partner->profile_image
+                    ? asset('storage/profile_images/' . $partner->profile_image)
+                    : asset('images/default_profile.png') }}"
+                    alt="ユーザープロフィール写真">
+                <h1>{{ $partner->name }}さんとの取引画面</h1>
                 <a href="">取引を完了する</a>
                 <livewire:review />
             </div>
-            <div class="chat-product"><img src="" alt="商品画像">
-                <h2>商品名</h2>
-                <h3>商品価格</h3>
+            <div class="chat-product">
+                <img src="{{ asset('storage/product_images/' . $chat->product->product_image) }}" alt="商品画像">
+                <h2>{{ $chat->product->name }}</h2>
+                <h3>{{ $chat->product->price }}</h3>
             </div>
-            <div class="chat-contents">
-                <img src="" alt="プロフィール画像">
-                <p>ユーザー名</p>
-                <p>チャット内容がここに出る</p>
-            </div>
+            @foreach ($messages as $message)
+                @if ($message->sender_id === auth()->id())
+                    <div class="chat-contents__right">
+                        <img src="{{ $message->sender->profile_image
+                            ? asset('storage/profile_images/' . $message->sender->profile_image)
+                            : asset('images/default_profile.png') }}"
+                            alt="ユーザープロフィール写真">
+                        <p>{{ $message->sender->name }}</p>
+                        <p>{{ $message->content }}</p>
+                    </div>
+                @else<div class="chat-contents__left">
+                        <img src="{{ $message->receiver->profile_image
+                            ? asset('storage/profile_images/' . $message->receiver->profile_image)
+                            : asset('images/default_profile.png') }}"
+                            alt="ユーザープロフィール写真">
+                        <p>{{ $message->receiver->name }}</p>
+                        <p>{{ $message->content }}</p>
+                    </div>
+                @endif
+            @endforeach
             <div class="chat-actions">
                 <a href="">編集</a>
                 <form action="">

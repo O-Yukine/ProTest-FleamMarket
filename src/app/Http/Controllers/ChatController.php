@@ -4,14 +4,20 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Chat;
+use App\Models\Message;
+
 
 class ChatController extends Controller
 {
-    function showChatRoom($chat_id)
+    public function showChatRoom($chat_id)
     {
 
-        $chat = Chat::findOrFail($chat_id);
+        $chat = Chat::with(['buyer', 'seller', 'product', 'messages.sender'])
+            ->findOrFail($chat_id);
 
-        return view('chat', compact('chat'));
+        $partner = $chat->seller_id === auth()->id() ? $chat->buyer : $chat->seller;
+        $messages = $chat->messages->sortBy('created_at');
+
+        return view('chat', compact('chat', 'partner', 'messages'));
     }
 }

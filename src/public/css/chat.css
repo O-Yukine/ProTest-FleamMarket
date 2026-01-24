@@ -1,3 +1,15 @@
+.chat-title {
+    display: flex;
+    align-items: center;
+    gap: 30px;
+}
+.chat-title img {
+    width: 150px;
+    height: 150px;
+    border-radius: 100%;
+    background-color: rgb(208, 204, 204);
+}
+
 .review {
     border: 1px solid black;
     border-radius: 3px;
@@ -7,4 +19,22 @@
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
+}
+.chat-product img {
+    width: 20%;
+}
+.chat-contents__right {
+    align-self: flex-end;
+    background-color: #00c300;
+    color: white;
+    border-radius: 16px;
+    padding: 10px;
+}
+
+.chat-contents__left {
+    align-self: flex-start;
+    background-color: #eee;
+    color: black;
+    border-radius: 16px;
+    padding: 10px;
 }

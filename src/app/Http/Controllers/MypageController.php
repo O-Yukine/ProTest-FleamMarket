@@ -60,7 +60,7 @@ class MypageController extends Controller
         return view('mypage', compact('user', 'profile', 'sell_items', 'purchased_items', 'tab'));
     }
 
-    function redirectItem($item_id)
+    public function redirectItem($item_id)
     {
         $chat = Chat::where('product_id', $item_id)->first();
 
