@@ -8,6 +8,11 @@
     <div class="chat">
         <div class="chat-lef-tcontent">
             <h2>その他の取引</h2>
+            @foreach ($transactionOnGoings as $transactionOngoing)
+                <div class="on_going_transaction">
+                    {{ $transactionOngoing->product->name }}
+                </div>
+            @endforeach
         </div>
         <div class="chat-right-contents">
             <div class="chat-title">
@@ -43,20 +48,20 @@
                         <p>{{ $message->content }}</p>
                     </div>
                 @endif
+                <div class="chat-actions">
+                    <form action="/chat-room/{{ $message->id }}" method="POST">
+                        @csrf
+                        @method('PATCH')
+                        <input type="text" name="content" value="{{ $message->content }}">
+                        <button type="submit">編集</button>
+                    </form>
+                    <form action="/chat-room/{{ $message->id }}" method="POST">
+                        @csrf
+                        @method('DELETE')
+                        <button type="submit">削除</button>
+                    </form>
+                </div>
             @endforeach
-            <div class="chat-actions">
-                <form action="/chat-room/{{ $message->id }}" method="POST">
-                    @csrf
-                    @method('PATCH')
-                    <input type="text" name="content" value="{{ $message->content }}">
-                    <button type="submit">編集</button>
-                </form>
-                <form action="/chat-room/{{ $message->id }}" method="POST">
-                    @csrf
-                    @method('DELETE')
-                    <button type="submit">削除</button>
-                </form>
-            </div>
             <form action="/chat-room/{{ $chat->id }}" method="POST" enctype="multipart/form-data">
                 @csrf
                 <div class="chat-message">

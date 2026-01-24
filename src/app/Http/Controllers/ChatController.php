@@ -15,9 +15,7 @@ class ChatController extends Controller
             'buyer',
             'seller',
             'product',
-            'messages.sender' => function ($q) {
-                $q->orderBy('created_at');
-            }
+            'messages.sender'
         ])
             ->findOrFail($chat_id);
 
@@ -26,11 +24,21 @@ class ChatController extends Controller
             ->where('is_read', false)
             ->update(['is_read' => true]);
 
-        $messages = $chat->messages;
+        $messages = $chat->messages()->orderBy('created_at')->get();
 
-        $partner = $chat->seller_id === auth()->id() ? $chat->buyer : $chat->seller;
+        $user = auth()->user();
 
-        return view('chat', compact('chat', 'partner', 'messages'));
+        $partner = $chat->seller_id === $user->id ? $chat->buyer : $chat->seller;
+
+        $transactionOnGoings = Chat::with('product')
+            ->where('status', 'open')
+            ->where(function ($q) use ($user) {
+                $q->where('buyer_id', $user->id)
+                    ->orWhere('seller_id', $user->id);
+            })->where('product_id', '!=', $chat->product->id)
+            ->get();
+
+        return view('chat', compact('chat', 'partner', 'messages', 'transactionOnGoings'));
     }
 
     public function sendMessage(Request $request, $chat_id)
