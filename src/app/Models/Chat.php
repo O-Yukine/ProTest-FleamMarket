@@ -13,6 +13,14 @@ class Chat extends Model
 {
     use HasFactory;
 
+    protected $fillable = [
+        'product_id',
+        'buyer_id',
+        'seller_id',
+        'status',
+        'last_message_at'
+    ];
+
     public function buyer()
     {
         return $this->belongsTo(User::class, 'buyer_id');
