@@ -53,6 +53,7 @@
                     @foreach ($transaction_items as $transaction)
                         <div class="card">
                             <a href="/mypage/profile/item/{{ $transaction->product_id }}">
+                                {{ $transaction->messages->count() }}
                                 <img
                                     src="{{ asset('storage/product_images/' . $transaction->product->product_image) }}"alt="商品画像">
                                 <div class="card-info">

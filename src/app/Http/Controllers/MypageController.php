@@ -62,7 +62,13 @@ class MypageController extends Controller
                 ->get();
         }
         if ($tab == 'transaction') {
-            $transaction_items = Chat::with('product')
+            $transaction_items = Chat::with([
+                'product',
+                'messages' => function ($q) use ($user) {
+                    $q->where('receiver_id', $user->id)
+                        ->where('is_read', false);
+                }
+            ])
                 ->where('status', 'open')
                 ->where(function ($q) use ($user) {
                     $q->where('buyer_id', $user->id)
@@ -71,12 +77,20 @@ class MypageController extends Controller
                 ->get();
         }
 
-        $unReadCount = Message::where('receiver_id', $user->id)
+        $unReadCount = Message::with('chat')
+            ->where('receiver_id', $user->id)
             ->where('is_read', false)
             ->count();
 
-
-        return view('mypage', compact('user', 'profile', 'sell_items', 'purchased_items', 'transaction_items', 'unReadCount', 'tab'));
+        return view('mypage', compact(
+            'user',
+            'profile',
+            'sell_items',
+            'purchased_items',
+            'transaction_items',
+            'unReadCount',
+            'tab'
+        ));
     }
 
     public function redirectItem($item_id)
