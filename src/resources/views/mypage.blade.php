@@ -25,23 +25,26 @@
                 @if ($tab === 'sell')
                     @foreach ($sell_items as $item)
                         <div class="card">
-                            <img src="{{ asset('storage/product_images/' . $item->product_image) }}" alt="商品画像">
-                            <div class="card-info">
-                                <p>{{ $item->name }}</p>
-                                @if ($item->is_sold)
-                                    <span class="sold-label">sold</span>
-                                @endif
-                            </div>
+                            <a href="/mypage/profile/item/{{ $item->id }}">
+                                <img src="{{ asset('storage/product_images/' . $item->product_image) }}" alt="商品画像">
+                                <div class="card-info">
+                                    <p>{{ $item->name }}</p>
+                                    @if ($item->is_sold)
+                                        <span class="sold-label">sold</span>
+                                    @endif
+                                </div>
                         </div>
                     @endforeach
                 @endif
                 @if ($tab === 'buy')
                     @foreach ($purchased_items as $purchase)
                         <div class="card">
-                            <img src="{{ asset('storage/product_images/' . $purchase->product->product_image) }}"alt="商品画像">
-                            <div class="card-info">
-                                <p>{{ $purchase->product->name }}</p>
-                            </div>
+                            <a href="/mypage/profile/item/{{ $purchase->product_id }}">
+                                <img
+                                    src="{{ asset('storage/product_images/' . $purchase->product->product_image) }}"alt="商品画像">
+                                <div class="card-info">
+                                    <p>{{ $purchase->product->name }}</p>
+                                </div>
                         </div>
                     @endforeach
                 @endif

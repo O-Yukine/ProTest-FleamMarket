@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Http\Requests\ProfileRequest;
 use App\Models\Product;
 use App\Models\Purchase;
+use App\Models\Chat;
 
 class MypageController extends Controller
 {
@@ -57,5 +58,16 @@ class MypageController extends Controller
         }
 
         return view('mypage', compact('user', 'profile', 'sell_items', 'purchased_items', 'tab'));
+    }
+
+    function redirectItem($item_id)
+    {
+        $chat = Chat::where('product_id', $item_id)->first();
+
+        if ($chat) {
+            return   redirect("/chat-room/{$chat->id}");
+        } else {
+            return redirect("/item/{$item_id}");
+        }
     }
 }

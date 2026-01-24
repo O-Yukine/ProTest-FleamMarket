@@ -44,7 +44,11 @@ Route::middleware('auth', 'verified')->prefix('mypage')->group(function () {
     Route::get('/', [MypageController::class, 'showMypage']);
     Route::get('/profile', [MypageController::class, 'showProfile']);
     Route::post('/profile', [MypageController::class, 'updateProfile']);
-    Route::get('/profile/chat', [ChatController::class, 'showChatPage']);
+    Route::get('/profile/item/{item_id}', [MypageController::class, 'redirectItem']);
+});
+
+Route::middleware(['auth', 'verified'])->group(function () {
+    Route::get('/chat-room/{chat_id}', [ChatController::class, 'showChatRoom']);
 });
 
 Route::post('/item/{item_id}/comment', [CommentController::class, 'makeComment'])->middleware('auth', 'verified');

@@ -3,12 +3,15 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Models\Chat;
 
 class ChatController extends Controller
 {
-    function showChatPage()
+    function showChatRoom($chat_id)
     {
 
-        return view('chat');
+        $chat = Chat::findOrFail($chat_id);
+
+        return view('chat', compact('chat'));
     }
 }
