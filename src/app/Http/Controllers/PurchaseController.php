@@ -63,7 +63,7 @@ class PurchaseController extends Controller
             'product_id' => $item_id,
             'buyer_id' => auth()->id(),
             'seller_id' => $product->user_id,
-            'status' => 'open'
+            'status' => 'pending'
         ]);
 
 

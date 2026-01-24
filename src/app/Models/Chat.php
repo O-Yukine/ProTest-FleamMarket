@@ -38,4 +38,11 @@ class Chat extends Model
     {
         return $this->hasMany(Message::class);
     }
+
+    public function openIfPending()
+    {
+        if ($this->status === 'pending') {
+            $this->update(['status' => 'open']);
+        }
+    }
 }

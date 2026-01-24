@@ -39,6 +39,8 @@ class ChatController extends Controller
             $message->save();
         }
 
+        $message->chat->openIfPending();
+
         return redirect("/chat-room/{$chat_id}");
     }
 
