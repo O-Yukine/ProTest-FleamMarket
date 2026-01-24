@@ -39,6 +39,8 @@ class PurchaseController extends Controller
         Stripe::setApiKey(env('STRIPE_SECRET'));
 
         $method = $request->payment_method === 'credit' ? ['card'] : ['konbini'];
+        $buyer_id = auth()->id();
+        $seller_id = $product->user_id;
 
         $checkout = Session::create([
             'payment_method_types' => $method,
@@ -55,10 +57,12 @@ class PurchaseController extends Controller
             'mode' => 'payment',
             'success_url' => url('/') . '?message=' . urlencode('決済が完了しました'),
             'metadata' => [
-                'purchase_id' => $purchase->id
+                'purchase_id' => $purchase->id,
+                'product_id' => $item_id,
+                'buyer_id' => $buyer_id,
+                'seller_id' => $seller_id
             ],
         ]);
-
 
         return redirect($checkout->url);
     }

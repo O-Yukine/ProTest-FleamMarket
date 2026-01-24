@@ -32,11 +32,11 @@
                     <button type="submit">削除</button>
                 </form>
             </div>
-            <form action="" method="POST" enctype="multipart/form-data">
+            <form action="'/mypage/profile/chat'" method="POST" enctype="multipart/form-data">
                 @csrf
                 <div class="chat-message">
                     <input type="text" name="content">
-                    <input type="file" name="image">
+                    <input type="file" name="img">
                 </div>
                 <button type="submit">送信</button>
             </form>
