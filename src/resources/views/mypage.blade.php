@@ -20,7 +20,10 @@
                 <a href="/mypage?page=sell" class="{{ $tab === 'sell' ? 'active' : '' }}">出品した商品</a>
                 <a href="/mypage?page=buy" class="{{ $tab === 'buy' ? 'active' : '' }}">購入した商品</a>
                 <a href="/mypage?page=transaction" class="{{ $tab === 'transaction' ? 'active' : '' }}">取引中の商品
-                    <span>{{ $unReadCount }}</span></a>
+                    @if ($unReadCount > 0)
+                        <span class="badge">{{ $unReadCount }}</span>
+                    @endif
+                </a>
             </div>
             <div class="products__list">
                 @if ($tab === 'sell')
@@ -53,7 +56,9 @@
                     @foreach ($transaction_items as $transaction)
                         <div class="card">
                             <a href="/mypage/profile/item/{{ $transaction->product_id }}">
-                                {{ $transaction->messages->count() }}
+                                @if ($transaction->unread_count > 0)
+                                    <span class="badge">{{ $transaction->unread_count }}</span>
+                                @endif
                                 <img
                                     src="{{ asset('storage/product_images/' . $transaction->product->product_image) }}"alt="商品画像">
                                 <div class="card-info">

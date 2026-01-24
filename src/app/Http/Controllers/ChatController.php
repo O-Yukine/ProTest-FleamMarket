@@ -11,11 +11,24 @@ class ChatController extends Controller
 {
     public function showChatRoom($chat_id)
     {
-        $chat = Chat::with(['buyer', 'seller', 'product', 'messages.sender'])
+        $chat = Chat::with([
+            'buyer',
+            'seller',
+            'product',
+            'messages.sender' => function ($q) {
+                $q->orderBy('created_at');
+            }
+        ])
             ->findOrFail($chat_id);
 
+        $chat->messages()
+            ->where('receiver_id', auth()->id())
+            ->where('is_read', false)
+            ->update(['is_read' => true]);
+
+        $messages = $chat->messages;
+
         $partner = $chat->seller_id === auth()->id() ? $chat->buyer : $chat->seller;
-        $messages = $chat->messages->sortBy('created_at');
 
         return view('chat', compact('chat', 'partner', 'messages'));
     }
@@ -31,10 +44,12 @@ class ChatController extends Controller
             'is_read' => false,
         ]);
 
+        $message->chat()->update(['last_message_at' => now()]);
+
         if ($request->hasFile('chat_image')) {
             $filename = $request->file('chat_image')->getClientOriginalName();
             $request->file('chat_image')->storeAs('public/chat_images', $filename);
-            $message['chat_image'] = $filename;
+            $message->chat_image = $filename;
             $message->save();
         }
 

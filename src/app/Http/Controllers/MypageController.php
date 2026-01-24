@@ -62,9 +62,10 @@ class MypageController extends Controller
                 ->get();
         }
         if ($tab == 'transaction') {
-            $transaction_items = Chat::with([
-                'product',
-                'messages' => function ($q) use ($user) {
+            $transaction_items = Chat::with(
+                'product'
+            )->withCount([
+                'messages as unread_count' => function ($q) use ($user) {
                     $q->where('receiver_id', $user->id)
                         ->where('is_read', false);
                 }
