@@ -49,16 +49,16 @@
                     @endforeach
                 @endif
                 @if ($tab === 'transaction')
-                    <p>取引中の商品表示</p>
-                    {{-- @foreach ($purchased_items as $purchase)
+                    @foreach ($transaction_items as $transaction)
                         <div class="card">
-                            <img
-                                src="{{ asset('storage/product_images/' . $purchase->product->product_image) }}"alt="商品画像">
-                            <div class="card-info">
-                                <p>{{ $purchase->product->name }}</p>
-                            </div>
+                            <a href="/mypage/profile/item/{{ $transaction->product_id }}">
+                                <img
+                                    src="{{ asset('storage/product_images/' . $transaction->product->product_image) }}"alt="商品画像">
+                                <div class="card-info">
+                                    <p>{{ $transaction->product->name }}</p>
+                                </div>
                         </div>
-                    @endforeach --}}
+                    @endforeach
                 @endif
             </div>
         </div>

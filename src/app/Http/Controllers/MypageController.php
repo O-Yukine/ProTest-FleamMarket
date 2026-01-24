@@ -8,6 +8,8 @@ use App\Models\Product;
 use App\Models\Purchase;
 use App\Models\Chat;
 
+
+
 class MypageController extends Controller
 {
     public function showProfile()
@@ -47,17 +49,28 @@ class MypageController extends Controller
 
         $sell_items = collect();
         $purchased_items = collect();
+        $transaction_items = collect();
 
         if ($tab == 'sell') {
             $sell_items = Product::with('purchases')->where('user_id', $user->id)->get();
-        } elseif ($tab == 'buy') {
+        }
+        if ($tab == 'buy') {
             $purchased_items = Purchase::with('product')
                 ->where('user_id', $user->id)
                 ->where('status', 'paid')
                 ->get();
         }
+        if ($tab == 'transaction') {
+            $transaction_items = Chat::with('product')
+                ->where('status', 'open')
+                ->where(function ($q) use ($user) {
+                    $q->where('buyer_id', $user->id)
+                        ->orWhere('seller_id', $user->id);
+                })
+                ->get();
+        }
 
-        return view('mypage', compact('user', 'profile', 'sell_items', 'purchased_items', 'tab'));
+        return view('mypage', compact('user', 'profile', 'sell_items', 'purchased_items', 'transaction_items', 'tab'));
     }
 
     public function redirectItem($item_id)
