@@ -36,6 +36,7 @@ class ChatController extends Controller
                 $q->where('buyer_id', $user->id)
                     ->orWhere('seller_id', $user->id);
             })->where('product_id', '!=', $chat->product->id)
+            ->orderByDesc('last_message_at')
             ->get();
 
         return view('chat', compact('chat', 'partner', 'messages', 'transactionOnGoings'));
