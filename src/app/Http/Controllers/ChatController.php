@@ -36,8 +36,29 @@ class ChatController extends Controller
             $filename = $request->file('chat_image')->getClientOriginalName();
             $request->file('chat_image')->storeAs('public/chat_images', $filename);
             $message['chat_image'] = $filename;
+            $message->save();
         }
 
-        redirect('/chat-room/{$chat_id}');
+        return redirect("/chat-room/{$chat_id}");
+    }
+
+    public function updateMessage(Request $request, $message_id)
+    {
+
+        $message = Message::findOrFail($message_id);
+        $message->update([
+            'content' => $request->content
+        ]);
+
+        return redirect("/chat-room/{$message->chat_id}");
+    }
+
+    public function deleteMessage($message_id)
+    {
+        $message = Message::findOrFail($message_id);
+        $chat_id = $message->chat_id;
+        $message->delete();
+
+        return redirect("/chat-room/{$chat_id}");
     }
 }

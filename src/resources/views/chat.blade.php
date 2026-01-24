@@ -45,8 +45,13 @@
                 @endif
             @endforeach
             <div class="chat-actions">
-                <a href="">編集</a>
-                <form action="">
+                <form action="/chat-room/{{ $message->id }}" method="POST">
+                    @csrf
+                    @method('PATCH')
+                    <input type="text" name="content" value="{{ $message->content }}">
+                    <button type="submit">編集</button>
+                </form>
+                <form action="/chat-room/{{ $message->id }}" method="POST">
                     @csrf
                     @method('DELETE')
                     <button type="submit">削除</button>
