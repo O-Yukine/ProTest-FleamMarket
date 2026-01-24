@@ -8,9 +8,10 @@
     <div class="chat">
         <div class="chat-lef-tcontent">
             <h2>その他の取引</h2>
-            @foreach ($transactionOnGoings as $transactionOngoing)
+            @foreach ($transactionOnGoings as $transaction)
                 <div class="on_going_transaction">
-                    {{ $transactionOngoing->product->name }}
+                    <a href="/mypage/profile/item/{{ $transaction->product_id }}">
+                        {{ $transaction->product->name }}</a>
                 </div>
             @endforeach
         </div>
