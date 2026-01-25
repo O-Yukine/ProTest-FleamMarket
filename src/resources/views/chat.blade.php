@@ -56,20 +56,30 @@
             @foreach ($messages as $message)
                 @if ($message->sender_id === auth()->id())
                     <div class="chat-contents__right">
-                        <img src="{{ $message->sender->profile_image
-                            ? asset('storage/profile_images/' . $message->sender->profile_image)
-                            : asset('images/default_profile.png') }}"
+                        <img class="chat-image__profile"
+                            src="{{ $message->sender->profile_image
+                                ? asset('storage/profile_images/' . $message->sender->profile_image)
+                                : asset('images/default_profile.png') }}"
                             alt="ユーザープロフィール写真">
                         <p>{{ $message->sender->name }}</p>
                         <p>{{ $message->content }}</p>
+                        @if ($message->chat_image)
+                            <img class="chat-image" src="{{ asset('storage/chat_images/' . $message->chat_image) }}"
+                                alt="チャット送信画像">
+                        @endif
                     </div>
                 @else<div class="chat-contents__left">
-                        <img src="{{ $message->sender->profile_image
-                            ? asset('storage/profile_images/' . $message->sender->profile_image)
-                            : asset('images/default_profile.png') }}"
+                        <img class="chat-image__profile"
+                            src="{{ $message->sender->profile_image
+                                ? asset('storage/profile_images/' . $message->sender->profile_image)
+                                : asset('images/default_profile.png') }}"
                             alt="ユーザープロフィール写真">
                         <p>{{ $message->sender->name }}</p>
                         <p>{{ $message->content }}</p>
+                        @if ($message->chat_image)
+                            <img class="chat-image" src="{{ asset('storage/chat_images/' . $message->chat_image) }}"
+                                alt="チャット送信画像">
+                        @endif
                     </div>
                 @endif
                 @if ($latestMessage && $message->id === $latestMessage->id && $message->sender_id === auth()->id())

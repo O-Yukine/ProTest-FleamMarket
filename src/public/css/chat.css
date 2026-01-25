@@ -67,7 +67,15 @@
     padding: 10px;
 }
 
-.chat-contents__left img,
-.chat-contents__right img {
-    width: 10%;
+.chat-image__profile {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+}
+.chat-image {
+    max-width: 200px;
+    max-height: 200px;
+    width: auto;
+    height: auto;
+    border-radius: 8px;
 }
