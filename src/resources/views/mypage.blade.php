@@ -10,13 +10,17 @@
                 <img
                     src="{{ $profile->profile_image ? asset('storage/profile_images/' . $profile->profile_image) : asset('images/default_profile.png') }}">
                 <h1>{{ $user->name }}</h1>
-                @for ($i = 1; $i <= 5; $i++)
-                    @if ($i <= $averageReview)
-                        <span class="star_filled">⭐︎</span>
-                    @else
-                        <span class="star">⭐︎</span>
-                    @endif
-                @endfor
+                @if ($averageReview <= 0)
+                    <span>レビューはまだありません</span>
+                @else
+                    @for ($i = 1; $i <= 5; $i++)
+                        @if ($i <= $averageReview)
+                            <span class="star_filled">⭐︎</span>
+                        @else
+                            <span class="star">⭐︎</span>
+                        @endif
+                    @endfor
+                @endif
             </div>
             <div class="mypage__update">
                 <a class ="mypage__update-link" href="/mypage/profile">プロフィールを編集</a>
