@@ -47,20 +47,34 @@
     gap: 5px;
     margin-bottom: 20px;
 }
+.chat-right-contents {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
 
 .chat-product img {
     width: 20%;
 }
-.chat-contents__right {
+
+.chat-messages {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.chat-messages__right {
     align-self: flex-end;
+    max-width: 60%;
     background-color: #00c300;
     color: white;
     border-radius: 16px;
     padding: 10px;
 }
 
-.chat-contents__left {
+.chat-messages__left {
     align-self: flex-start;
+    max-width: 60%;
     background-color: #eee;
     color: black;
     border-radius: 16px;

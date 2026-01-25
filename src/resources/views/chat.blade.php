@@ -53,49 +53,51 @@
                 <h2>{{ $chat->product->name }}</h2>
                 <h3>{{ $chat->product->price }}</h3>
             </div>
-            @foreach ($messages as $message)
-                @if ($message->sender_id === auth()->id())
-                    <div class="chat-contents__right">
-                        <img class="chat-image__profile"
-                            src="{{ $message->sender->profile_image
-                                ? asset('storage/profile_images/' . $message->sender->profile_image)
-                                : asset('images/default_profile.png') }}"
-                            alt="ユーザープロフィール写真">
-                        <p>{{ $message->sender->name }}</p>
-                        <p>{{ $message->content }}</p>
-                        @if ($message->chat_image)
-                            <img class="chat-image" src="{{ asset('storage/chat_images/' . $message->chat_image) }}"
-                                alt="チャット送信画像">
-                        @endif
-                    </div>
-                @else<div class="chat-contents__left">
-                        <img class="chat-image__profile"
-                            src="{{ $message->sender->profile_image
-                                ? asset('storage/profile_images/' . $message->sender->profile_image)
-                                : asset('images/default_profile.png') }}"
-                            alt="ユーザープロフィール写真">
-                        <p>{{ $message->sender->name }}</p>
-                        <p>{{ $message->content }}</p>
-                        @if ($message->chat_image)
-                            <img class="chat-image" src="{{ asset('storage/chat_images/' . $message->chat_image) }}"
-                                alt="チャット送信画像">
-                        @endif
-                    </div>
-                @endif
-                @if ($latestMessage && $message->id === $latestMessage->id && $message->sender_id === auth()->id())
-                    <div class="chat-actions">
-                        <button type="button" class="edit-btn" data-id="{{ $message->id }}"
-                            data-content="{{ $message->content }}">
-                            編集
-                        </button>
-                        <form action="/chat-room/{{ $message->id }}" method="POST">
-                            @csrf
-                            @method('DELETE')
-                            <button type="submit">削除</button>
-                        </form>
-                    </div>
-                @endif
-            @endforeach
+            <div class="chat-messages">
+                @foreach ($messages as $message)
+                    @if ($message->sender_id === auth()->id())
+                        <div class="chat-messages__right">
+                            <img class="chat-image__profile"
+                                src="{{ $message->sender->profile_image
+                                    ? asset('storage/profile_images/' . $message->sender->profile_image)
+                                    : asset('images/default_profile.png') }}"
+                                alt="ユーザープロフィール写真">
+                            <p>{{ $message->sender->name }}</p>
+                            <p>{{ $message->content }}</p>
+                            @if ($message->chat_image)
+                                <img class="chat-image" src="{{ asset('storage/chat_images/' . $message->chat_image) }}"
+                                    alt="チャット送信画像">
+                            @endif
+                        </div>
+                    @else<div class="chat-messages__left">
+                            <img class="chat-image__profile"
+                                src="{{ $message->sender->profile_image
+                                    ? asset('storage/profile_images/' . $message->sender->profile_image)
+                                    : asset('images/default_profile.png') }}"
+                                alt="ユーザープロフィール写真">
+                            <p>{{ $message->sender->name }}</p>
+                            <p>{{ $message->content }}</p>
+                            @if ($message->chat_image)
+                                <img class="chat-image" src="{{ asset('storage/chat_images/' . $message->chat_image) }}"
+                                    alt="チャット送信画像">
+                            @endif
+                        </div>
+                    @endif
+                    @if ($latestMessage && $message->id === $latestMessage->id && $message->sender_id === auth()->id())
+                        <div class="chat-actions">
+                            <button type="button" class="edit-btn" data-id="{{ $message->id }}"
+                                data-content="{{ $message->content }}">
+                                編集
+                            </button>
+                            <form action="/chat-room/{{ $message->id }}" method="POST">
+                                @csrf
+                                @method('DELETE')
+                                <button type="submit">削除</button>
+                            </form>
+                        </div>
+                    @endif
+                @endforeach
+            </div>
             <form id="chatForm" action="/chat-room/{{ $chat->id }}" method="POST" enctype="multipart/form-data">
                 @csrf
                 <input type="hidden" name="_method" id="formMethod" value="POST">
