@@ -8,6 +8,7 @@ use App\Models\Product;
 use App\Models\Purchase;
 use App\Models\Chat;
 use App\Models\Message;
+use App\Models\Review;
 
 
 
@@ -82,6 +83,9 @@ class MypageController extends Controller
             ->where('is_read', false)
             ->count();
 
+        $review = Review::where('reviewee_id', $user->id)->avg('score') ?? 0;
+        $averageReview = round($review, 2);
+
         return view('mypage', compact(
             'user',
             'profile',
@@ -89,6 +93,7 @@ class MypageController extends Controller
             'purchased_items',
             'transaction_items',
             'unReadCount',
+            'averageReview',
             'tab'
         ));
     }

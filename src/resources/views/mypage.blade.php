@@ -9,7 +9,8 @@
             <div class="mypage__profile">
                 <img
                     src="{{ $profile->profile_image ? asset('storage/profile_images/' . $profile->profile_image) : asset('images/default_profile.png') }}">
-                <h3>{{ $user->name }}</h3>
+                <h1>{{ $user->name }}</h1>
+                <h2>{{ $averageReview }}</h2>
             </div>
             <div class="mypage__update">
                 <a class ="mypage__update-link" href="/mypage/profile">プロフィールを編集</a>
