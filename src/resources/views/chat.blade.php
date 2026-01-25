@@ -23,8 +23,7 @@
                     alt="ユーザープロフィール写真">
                 <h1>{{ $partner->name }}さんとの取引画面</h1>
                 @if ($chat->buyer_id === auth()->id())
-                    <a href="">取引を完了する</a>
-                    <livewire:review />
+                    <livewire:review :chat="$chat" />
                 @endif
             </div>
             <div class="chat-product">

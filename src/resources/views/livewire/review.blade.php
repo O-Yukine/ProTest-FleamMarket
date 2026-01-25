@@ -1,17 +1,20 @@
 <div>
     <div>
-        <button wire:click="openModal" type="button"
-            class="px-4 py-2 font-bold text-white bg-blue-500 rounded hover:bg-blue-700">
-            モーダルを表示
+        <button wire:click="completeTransaction">
+            取引を完了する
         </button>
-
         @if ($showModal)
             <div class="review">
                 <h1>取引が完了しました</h1>
                 <p>今回の取引相手はどうでしたか?
                 </p>
-                <p>⭐️⭐️⭐️⭐️⭐️</p>
-                <button type="submit">送信する</button>
+                <div class="star">
+                    @for ($i = 1; $i <= 5; $i++)
+                        <span wire:click="setRating({{ $i }})" wire:click="setRating({{ $i }})"
+                            class="star @if ($i <= $rating) selected @endif">⭐︎</span>
+                    @endfor
+                </div>
+                <button wire:click="submitReview" type="button">送信する</button>
             </div>
         @endif
     </div>

@@ -7,6 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 use App\Models\User;
 use App\Models\Product;
 use App\Models\Message;
+use App\Models\Review;
 
 
 class Chat extends Model
@@ -44,5 +45,9 @@ class Chat extends Model
         if ($this->status === 'pending') {
             $this->update(['status' => 'open']);
         }
+    }
+    public function reviews()
+    {
+        return $this->hasMany(Review::class);
     }
 }

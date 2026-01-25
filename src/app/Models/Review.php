@@ -5,6 +5,8 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use App\Models\User;
+use App\Models\Chat;
+
 
 
 class Review extends Model
@@ -25,5 +27,10 @@ class Review extends Model
     public function reviewee()
     {
         return $this->belongsTo(User::class, 'reviewee_id');
+    }
+
+    public function chat()
+    {
+        return $this->belongsTo(Chat::class);
     }
 }

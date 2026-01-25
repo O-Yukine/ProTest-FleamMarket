@@ -15,10 +15,13 @@ class CreateReviewsTable extends Migration
     {
         Schema::create('reviews', function (Blueprint $table) {
             $table->id();
+            $table->foreignId('chat_id')->constrained()->cascadeOnDelete();
             $table->foreignId('reviewer_id')->constrained('users')->cascadeOnDelete();
             $table->foreignId('reviewee_id')->constrained('users')->cascadeOnDelete();
             $table->unsignedTinyInteger('score');
             $table->timestamps();
+
+            $table->unique(['chat_id', 'reviewer_id']);
         });
     }
 
