@@ -98,20 +98,24 @@
                     @endif
                 @endforeach
             </div>
-            <form id="chatForm" action="/chat-room/{{ $chat->id }}" method="POST" enctype="multipart/form-data">
-                @csrf
-                <input type="hidden" name="_method" id="formMethod" value="POST">
-                <input type="hidden" name="message_id" id="messageId">
-                <input type="hidden" name="receiver_id" value="{{ $partner->id }}">
-                <div class="chat-message">
-                    <input type="text" name="content" id="chatInput" value="{{ old('content') }}">
-                    <input type="file" name="chat_image" id="chat_image">
-                    <label for="chat_image" class="custom-file-input">
-                        <span class="file-text">画像を追加</span>
-                    </label>
-                </div>
-                <button type="submit" id="submitBtn">送信</button>
-            </form>
+            @if (!in_array($chat->status, ['buyer_reviewed', 'seller_reviewed', 'completed']))
+                <form id="chatForm" action="/chat-room/{{ $chat->id }}" method="POST" enctype="multipart/form-data">
+                    @csrf
+                    <input type="hidden" name="_method" id="formMethod" value="POST">
+                    <input type="hidden" name="message_id" id="messageId">
+                    <input type="hidden" name="receiver_id" value="{{ $partner->id }}">
+                    <div class="chat-message">
+                        <input type="text" name="content" id="chatInput" value="{{ old('content') }}">
+                        <input type="file" name="chat_image" id="chat_image">
+                        <label for="chat_image" class="custom-file-input">
+                            <span class="file-text">画像を追加</span>
+                        </label>
+                    </div>
+                    <button type="submit" id="submitBtn">送信</button>
+                </form>
+            @else
+                <p>この取引はレビュー済みのため、チャットの送信はできません。</p>
+            @endif
         </div>
     </div>
 @endsection
