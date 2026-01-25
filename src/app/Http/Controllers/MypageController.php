@@ -62,19 +62,18 @@ class MypageController extends Controller
                 ->get();
         }
         if ($tab == 'transaction') {
-            $transaction_items = Chat::with(
-                'product'
-            )->withCount([
-                'messages as unread_count' => function ($q) use ($user) {
-                    $q->where('receiver_id', $user->id)
-                        ->where('is_read', false);
-                }
-            ])
-                ->where('status', 'open')
+            $transaction_items = Chat::with('product')
+                ->withCount([
+                    'messages as unread_count' => function ($q) use ($user) {
+                        $q->where('receiver_id', $user->id)
+                            ->where('is_read', false);
+                    }
+                ])->whereIn('status', ['open', 'buyer_reviewed', 'seller_reviewed'])
                 ->where(function ($q) use ($user) {
                     $q->where('buyer_id', $user->id)
                         ->orWhere('seller_id', $user->id);
                 })
+                ->with('product')
                 ->get();
         }
 

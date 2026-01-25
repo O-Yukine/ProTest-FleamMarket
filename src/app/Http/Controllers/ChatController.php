@@ -103,16 +103,32 @@ class ChatController extends Controller
 
     public function submitReview(Request $request)
     {
+        $user = auth()->user();
 
         $chat = Chat::findOrFail($request->chat_id);
-        $chat->update(['status' => 'completed']);
 
         Review::create([
             'chat_id' => $request->chat_id,
-            'reviewer_id' => auth()->id(),
+            'reviewer_id' => $user->id,
             'reviewee_id' => $request->reviewee_id,
             'score' => $request->score,
         ]);
+
+        $buyerReviewed = $chat->reviews()->where('reviewer_id', $chat->buyer_id)->exists();
+        $sellerReviewed = $chat->reviews()->where('reviewer_id', $chat->seller_id)->exists();
+
+
+        if ($buyerReviewed && $sellerReviewed) {
+            $chat->status = 'completed';
+        } elseif ($user->id === $chat->buyer_id) {
+            $chat->status = 'buyer_reviewed';
+        } elseif ($user->id === $chat->seller_id) {
+            $chat->status = 'seller_reviewed';
+        } else {
+            $chat->status = 'open';
+        }
+
+        $chat->save();
 
         return redirect('/');
     }
