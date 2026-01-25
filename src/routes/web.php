@@ -65,4 +65,4 @@ Route::middleware('auth', 'verified')->prefix('purchase')->group(function () {
     Route::post('/address/{item_id}', [PurchaseController::class, 'updateShippingAddress']);
 });
 
-Route::post('/stripe/webhook', [StripeWebhookController::class, 'handle']);
+// Route::post('/stripe/webhook', [StripeWebhookController::class, 'handle']);

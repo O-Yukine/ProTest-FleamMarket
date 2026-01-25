@@ -74,13 +74,10 @@
                 @endif
                 @if ($latestMessage && $message->id === $latestMessage->id && $message->sender_id === auth()->id())
                     <div class="chat-actions">
-                        <form action="/chat-room/{{ $message->id }}" method="POST">
-                            @csrf
-                            @method('PATCH')
-                            <input type="text" name="content" value="{{ $message->content }}">
-                            <button type="submit">編集</button>
-                        </form>
-
+                        <button type="button" class="edit-btn" data-id="{{ $message->id }}"
+                            data-content="{{ $message->content }}">
+                            編集
+                        </button>
                         <form action="/chat-room/{{ $message->id }}" method="POST">
                             @csrf
                             @method('DELETE')
@@ -89,23 +86,47 @@
                     </div>
                 @endif
             @endforeach
-            <form action="/chat-room/{{ $chat->id }}" method="POST" enctype="multipart/form-data">
+            <form id="chatForm" action="/chat-room/{{ $chat->id }}" method="POST" enctype="multipart/form-data">
                 @csrf
+                <input type="hidden" name="_method" id="formMethod" value="POST">
+                <input type="hidden" name="message_id" id="messageId">
+                <input type="hidden" name="receiver_id" value="{{ $partner->id }}">
                 <div class="chat-message">
-                    <input type="hidden" name="receiver_id" value="{{ $partner->id }}">
-                    <input type="text" name="content" value="{{ old('content') }}">
+                    <input type="text" name="content" id="chatInput" value="{{ old('content') }}">
                     <input type="file" name="chat_image" id="chat_image">
                     <label for="chat_image" class="custom-file-input">
                         <span class="file-text">画像を追加</span>
                     </label>
                 </div>
-                <button type="submit">送信</button>
+                <button type="submit" id="submitBtn">送信</button>
             </form>
         </div>
     </div>
 @endsection
 
 <script>
+    document.addEventListener('DOMContentLoaded', () => {
+        const chatForm = document.getElementById('chatForm');
+        const chatInput = document.getElementById('chatInput');
+        const submitBtn = document.getElementById('submitBtn');
+        const formMethod = document.getElementById('formMethod');
+        const messageIdInput = document.getElementById('messageId');
+
+        document.querySelectorAll('.edit-btn').forEach(btn => {
+            btn.addEventListener('click', () => {
+
+                chatInput.value = btn.dataset.content;
+
+                chatForm.action = `/chat-room/${btn.dataset.id}`;
+                formMethod.value = 'PATCH';
+                messageIdInput.value = btn.dataset.id;
+
+                submitBtn.textContent = '保存';
+                chatInput.focus();
+            });
+        });
+    });
+
     document.addEventListener('DOMContentLoaded', () => {
         const openBtn = document.getElementById('openReviewBtn');
         const modal = document.getElementById('reviewModal');
