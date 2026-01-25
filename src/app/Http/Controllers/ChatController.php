@@ -28,6 +28,8 @@ class ChatController extends Controller
 
         $messages = $chat->messages()->orderBy('created_at')->get();
 
+        $latestMessage = $messages->last();
+
         $partner = $chat->seller_id === $user->id ? $chat->buyer : $chat->seller;
 
         $transactionOnGoings = Chat::with('product')
@@ -39,7 +41,7 @@ class ChatController extends Controller
             ->orderByDesc('last_message_at')
             ->get();
 
-        return view('chat', compact('chat', 'partner', 'messages', 'transactionOnGoings'));
+        return view('chat', compact('chat', 'partner', 'messages', 'transactionOnGoings', 'latestMessage'));
     }
 
     public function sendMessage(Request $request, $chat_id)

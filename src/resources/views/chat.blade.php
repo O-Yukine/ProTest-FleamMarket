@@ -22,8 +22,10 @@
                     : asset('images/default_profile.png') }}"
                     alt="ユーザープロフィール写真">
                 <h1>{{ $partner->name }}さんとの取引画面</h1>
-                <a href="">取引を完了する</a>
-                <livewire:review />
+                @if ($chat->buyer_id === auth()->id())
+                    <a href="">取引を完了する</a>
+                    <livewire:review />
+                @endif
             </div>
             <div class="chat-product">
                 <img src="{{ asset('storage/product_images/' . $chat->product->product_image) }}" alt="商品画像">
@@ -49,19 +51,22 @@
                         <p>{{ $message->content }}</p>
                     </div>
                 @endif
-                <div class="chat-actions">
-                    <form action="/chat-room/{{ $message->id }}" method="POST">
-                        @csrf
-                        @method('PATCH')
-                        <input type="text" name="content" value="{{ $message->content }}">
-                        <button type="submit">編集</button>
-                    </form>
-                    <form action="/chat-room/{{ $message->id }}" method="POST">
-                        @csrf
-                        @method('DELETE')
-                        <button type="submit">削除</button>
-                    </form>
-                </div>
+                @if ($latestMessage && $message->id === $latestMessage->id && $message->sender_id === auth()->id())
+                    <div class="chat-actions">
+                        <form action="/chat-room/{{ $message->id }}" method="POST">
+                            @csrf
+                            @method('PATCH')
+                            <input type="text" name="content" value="{{ $message->content }}">
+                            <button type="submit">編集</button>
+                        </form>
+
+                        <form action="/chat-room/{{ $message->id }}" method="POST">
+                            @csrf
+                            @method('DELETE')
+                            <button type="submit">削除</button>
+                        </form>
+                    </div>
+                @endif
             @endforeach
             <form action="/chat-room/{{ $chat->id }}" method="POST" enctype="multipart/form-data">
                 @csrf
