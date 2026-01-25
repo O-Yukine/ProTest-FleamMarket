@@ -18,8 +18,16 @@
     border-radius: 100%;
     background-color: rgb(208, 204, 204);
 }
-.mypage__profile h3 {
+.mypage__profile h1 {
     font-size: 24px;
+}
+.star {
+    font-size: 24px;
+    color: gray;
+}
+.star_filled {
+    font-size: 24px;
+    color: gold;
 }
 
 .mypage__update-link {
