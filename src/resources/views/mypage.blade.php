@@ -34,7 +34,7 @@
                 <a href="/mypage?page=buy" class="{{ $tab === 'buy' ? 'active' : '' }}">購入した商品</a>
                 <a href="/mypage?page=transaction" class="{{ $tab === 'transaction' ? 'active' : '' }}">取引中の商品
                     @if ($unReadCount > 0)
-                        <span class="badge">{{ $unReadCount }}</span>
+                        <span class="badge__tab">{{ $unReadCount }}</span>
                     @endif
                 </a>
             </div>
@@ -70,7 +70,7 @@
                         <div class="card">
                             <a href="/mypage/profile/item/{{ $transaction->product_id }}">
                                 @if ($transaction->unread_count > 0)
-                                    <span class="badge">{{ $transaction->unread_count }}</span>
+                                    <span class="badge__product">{{ $transaction->unread_count }}</span>
                                 @endif
                                 <img
                                     src="{{ asset('storage/product_images/' . $transaction->product->product_image) }}"alt="商品画像">
