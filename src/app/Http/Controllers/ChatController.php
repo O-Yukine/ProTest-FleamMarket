@@ -83,9 +83,20 @@ class ChatController extends Controller
     public function deleteMessage($message_id)
     {
         $message = Message::findOrFail($message_id);
-        $chat_id = $message->chat_id;
-        $message->delete();
 
-        return redirect("/chat-room/{$chat_id}");
+        abort_if($message->sender_id !== auth()->id(), 403);
+
+        $chat = $message->chat;
+
+        $message->delete();
+        $latestMessage = $chat->messages()
+            ->latest('created_at')
+            ->first();
+
+        $chat->update([
+            'last_message_at' => $latestMessage?->created_at
+        ]);
+
+        return redirect("/chat-room/{$chat->id}");
     }
 }
