@@ -48,13 +48,15 @@
     gap: 40px;
     padding-left: 100px;
 }
-.products_nav a {
+.products_nav a,
+.products__list a {
     text-decoration: none;
     color: #000;
     padding-bottom: 5px;
 }
 
-.products_nav a:visited {
+.products_nav a:visited,
+.products__list a:visited {
     color: #000;
 }
 .products_nav a.active {
