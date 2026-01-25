@@ -14,6 +14,7 @@ class Review extends Model
     use HasFactory;
 
     protected $fillable = [
+        'chat_id',
         'reviewer_id',
         'reviewee_id',
         'score',

@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Chat;
 use App\Models\Message;
+use App\Models\Review;
 
 
 class ChatController extends Controller
@@ -98,5 +99,21 @@ class ChatController extends Controller
         ]);
 
         return redirect("/chat-room/{$chat->id}");
+    }
+
+    public function submitReview(Request $request)
+    {
+
+        $chat = Chat::findOrFail($request->chat_id);
+        $chat->update(['status' => 'completed']);
+
+        Review::create([
+            'chat_id' => $request->chat_id,
+            'reviewer_id' => auth()->id(),
+            'reviewee_id' => $request->reviewee_id,
+            'score' => $request->score,
+        ]);
+
+        return redirect('/');
     }
 }

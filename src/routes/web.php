@@ -54,6 +54,7 @@ Route::middleware(['auth', 'verified'])->group(function () {
     Route::delete('/chat-room/{message_id}', [ChatController::class, 'deleteMessage']);
 });
 
+Route::post('/review', [ChatController::class, 'submitReview'])->middleware('auth', 'verified');
 Route::post('/item/{item_id}/comment', [CommentController::class, 'makeComment'])->middleware('auth', 'verified');
 Route::post('/item/{item_id}/like', [LikeController::class, 'likeItem'])->middleware('auth', 'verified');
 

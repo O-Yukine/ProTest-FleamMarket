@@ -23,9 +23,31 @@
                     alt="ユーザープロフィール写真">
                 <h1>{{ $partner->name }}さんとの取引画面</h1>
                 @if ($chat->buyer_id === auth()->id())
-                    <livewire:review :chat="$chat" />
+                    <button id="openReviewBtn">取引を完了する</button>
                 @endif
             </div>
+
+            {{-- モーダル  --}}
+            <div id="reviewModal" class="review hidden">
+                <h1>取引が完了しました</h1>
+                <p>今回の取引相手はどうでしたか?</p>
+                <div class="star-container">
+                    <span class="star" data-value="1">⭐︎</span>
+                    <span class="star" data-value="2">⭐︎</span>
+                    <span class="star" data-value="3">⭐︎</span>
+                    <span class="star" data-value="4">⭐︎</span>
+                    <span class="star" data-value="5">⭐︎</span>
+                </div>
+                <form action="/review" id="reviewForm" method="POST">
+                    @csrf
+                    <input type="hidden" name="score" id="ratingInput" value="0">
+                    <input type="hidden" name="chat_id" value="{{ $chat->id }}">
+                    <input type="hidden" name="reviewee_id" value="{{ $partner->id }}">
+                    <button type="submit">送信する</button>
+                </form>
+            </div>
+
+            {{-- チャットメッセージの表示 --}}
             <div class="chat-product">
                 <img src="{{ asset('storage/product_images/' . $chat->product->product_image) }}" alt="商品画像">
                 <h2>{{ $chat->product->name }}</h2>
@@ -82,3 +104,32 @@
         </div>
     </div>
 @endsection
+
+<script>
+    document.addEventListener('DOMContentLoaded', () => {
+        const openBtn = document.getElementById('openReviewBtn');
+        const modal = document.getElementById('reviewModal');
+        const stars = modal.querySelectorAll('.star');
+        const ratingInput = document.getElementById('ratingInput');
+        let currentRating = 0;
+
+        openBtn.addEventListener('click', () => {
+            modal.classList.remove('hidden');
+        });
+
+        stars.forEach(star => {
+            star.addEventListener('click', () => {
+                currentRating = star.dataset.value;
+                ratingInput.value = currentRating;
+
+                stars.forEach(s => {
+                    if (s.dataset.value <= currentRating) {
+                        s.classList.add('selected');
+                    } else {
+                        s.classList.remove('selected');
+                    }
+                });
+            });
+        });
+    });
+</script>

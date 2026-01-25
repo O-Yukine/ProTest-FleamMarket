@@ -14,13 +14,24 @@
     border: 1px solid black;
     background: #ebecb7;
     border-radius: 3px;
-    width: 600px;
-    height: 350px;
+    width: 400px;
+    height: 300px;
     position: fixed;
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    z-index: 1000;
 }
+
+.hidden {
+    display: none;
+}
+
 .star {
     cursor: pointer;
     font-size: 2rem;
@@ -29,6 +40,12 @@
 
 .star.selected {
     color: orange;
+}
+
+.star-container {
+    display: flex;
+    gap: 5px;
+    margin-bottom: 20px;
 }
 
 .chat-product img {
