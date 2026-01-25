@@ -113,9 +113,15 @@
         const ratingInput = document.getElementById('ratingInput');
         let currentRating = 0;
 
-        openBtn.addEventListener('click', () => {
+        if (openBtn) {
+            openBtn.addEventListener('click', () => {
+                modal.classList.remove('hidden');
+            });
+        }
+        const showModalForSeller = @json($chat->status === 'buyer_reviewed' && auth()->id() === $chat->seller_id);
+        if (showModalForSeller) {
             modal.classList.remove('hidden');
-        });
+        }
 
         stars.forEach(star => {
             star.addEventListener('click', () => {
