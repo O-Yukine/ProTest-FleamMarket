@@ -29,7 +29,9 @@
 
             {{-- モーダル  --}}
             <div id="reviewModal" class="review hidden">
-                <h1>取引が完了しました</h1>
+                <div class="modal-title">
+                    <h1>取引が完了しました。</h1>
+                </div>
                 <p>今回の取引相手はどうでしたか?</p>
                 <div class="star-container">
                     <span class="star" data-value="1">⭐︎</span>
@@ -43,7 +45,7 @@
                     <input type="hidden" name="score" id="ratingInput" value="0">
                     <input type="hidden" name="chat_id" value="{{ $chat->id }}">
                     <input type="hidden" name="reviewee_id" value="{{ $partner->id }}">
-                    <button type="submit">送信する</button>
+                    <button class="review__submit" type="submit">送信する</button>
                 </form>
             </div>
 
@@ -98,24 +100,20 @@
                     @endif
                 @endforeach
             </div>
-            @if (!in_array($chat->status, ['buyer_reviewed', 'seller_reviewed', 'completed']))
-                <form id="chatForm" action="/chat-room/{{ $chat->id }}" method="POST" enctype="multipart/form-data">
-                    @csrf
-                    <input type="hidden" name="_method" id="formMethod" value="POST">
-                    <input type="hidden" name="message_id" id="messageId">
-                    <input type="hidden" name="receiver_id" value="{{ $partner->id }}">
-                    <div class="chat-message">
-                        <input type="text" name="content" id="chatInput" value="{{ old('content') }}">
-                        <input type="file" name="chat_image" id="chat_image">
-                        <label for="chat_image" class="custom-file-input">
-                            <span class="file-text">画像を追加</span>
-                        </label>
-                    </div>
-                    <button type="submit" id="submitBtn">送信</button>
-                </form>
-            @else
-                <p>この取引はレビュー済みのため、チャットの送信はできません。</p>
-            @endif
+            <form id="chatForm" action="/chat-room/{{ $chat->id }}" method="POST" enctype="multipart/form-data">
+                @csrf
+                <input type="hidden" name="_method" id="formMethod" value="POST">
+                <input type="hidden" name="message_id" id="messageId">
+                <input type="hidden" name="receiver_id" value="{{ $partner->id }}">
+                <div class="chat-message">
+                    <input type="text" name="content" id="chatInput" value="{{ old('content') }}">
+                    <input type="file" name="chat_image" id="chat_image">
+                    <label for="chat_image" class="custom-file-input">
+                        <span class="file-text">画像を追加</span>
+                    </label>
+                </div>
+                <button type="submit" id="submitBtn">送信</button>
+            </form>
         </div>
     </div>
 @endsection

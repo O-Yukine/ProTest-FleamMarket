@@ -1,7 +1,12 @@
+.chat {
+    max-width: 1540px;
+    margin: 0 auto;
+    padding: 20px 40px;
+}
+
 .chat-title {
     display: flex;
     align-items: center;
-    gap: 30px;
 }
 .chat-title img {
     width: 150px;
@@ -12,40 +17,61 @@
 
 .review {
     border: 1px solid black;
-    background: #ebecb7;
-    border-radius: 3px;
-    width: 400px;
+    background: #fdfce6;
+    border-radius: 15px;
+    width: 600px;
     height: 300px;
-    position: fixed;
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
-    padding: 20px;
     display: flex;
     flex-direction: column;
-    align-items: center;
-    justify-content: center;
     z-index: 1000;
+    position: relative;
 }
 
 .hidden {
     display: none;
 }
 
+.modal-title {
+    padding-left: 20px;
+    border-bottom: 1px solid #000;
+    width: 100%;
+}
+.review p {
+    color: #868686;
+    margin-top: 16px;
+    padding-left: 20px;
+}
 .star {
+    width: 100%;
     cursor: pointer;
-    font-size: 2rem;
-    color: grey;
+    text-align: center;
+    font-size: 60px;
+    color: #d9d9d9;
 }
 
 .star.selected {
-    color: orange;
+    color: #fff048;
 }
 
 .star-container {
+    width: 100%;
     display: flex;
-    gap: 5px;
     margin-bottom: 20px;
+    border-bottom: 1px solid #000;
+}
+.review__submit {
+    background-color: #ff8282;
+    color: #fff;
+    border-radius: 5px;
+    width: 130px;
+    height: 50px;
+    padding: 5px;
+    border: 1px solid #ff8282;
+    position: absolute;
+    left: 450px;
 }
 .chat-right-contents {
     display: flex;
