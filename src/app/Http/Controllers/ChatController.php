@@ -7,6 +7,7 @@ use App\Models\Chat;
 use App\Models\Message;
 use App\Models\Review;
 use App\Http\Requests\ChatRequest;
+use App\Notifications\TransactionCompleteNotification;
 
 
 class ChatController extends Controller
@@ -123,6 +124,7 @@ class ChatController extends Controller
             $chat->status = 'completed';
         } elseif ($user->id === $chat->buyer_id) {
             $chat->status = 'buyer_reviewed';
+            $chat->seller->notify(new TransactionCompleteNotification($chat));
         } elseif ($user->id === $chat->seller_id) {
             $chat->status = 'seller_reviewed';
         } else {
