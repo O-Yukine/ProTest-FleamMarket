@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Models\Chat;
 use App\Models\Message;
 use App\Models\Review;
+use App\Http\Requests\ChatRequest;
 
 
 class ChatController extends Controller
@@ -45,7 +46,7 @@ class ChatController extends Controller
         return view('chat', compact('chat', 'partner', 'messages', 'transactionOnGoings', 'latestMessage'));
     }
 
-    public function sendMessage(Request $request, $chat_id)
+    public function sendMessage(ChatRequest $request, $chat_id)
     {
 
         $message =  Message::create([

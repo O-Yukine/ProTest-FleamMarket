@@ -106,6 +106,13 @@
                     <input type="hidden" name="_method" id="formMethod" value="POST">
                     <input type="hidden" name="message_id" id="messageId">
                     <input type="hidden" name="receiver_id" value="{{ $partner->id }}">
+                    @if (count($errors) > 0)
+                        <ul class="list__error">
+                            @foreach ($errors->all() as $error)
+                                <li>{{ $error }}</li>
+                            @endforeach
+                        </ul>
+                    @endif
                     <div class="chat-message">
                         <input type="text" name="content" id="chatInput" value="{{ old('content') }}">
                         <input type="file" name="chat_image" id="chat_image">
@@ -130,51 +137,49 @@
         const formMethod = document.getElementById('formMethod');
         const messageIdInput = document.getElementById('messageId');
 
+        // 編集ボタン
         document.querySelectorAll('.edit-btn').forEach(btn => {
             btn.addEventListener('click', () => {
-
                 chatInput.value = btn.dataset.content;
-
                 chatForm.action = `/chat-room/${btn.dataset.id}`;
                 formMethod.value = 'PATCH';
                 messageIdInput.value = btn.dataset.id;
-
                 submitBtn.textContent = '保存';
                 chatInput.focus();
             });
         });
-    });
 
-    document.addEventListener('DOMContentLoaded', () => {
+        // モーダル
         const openBtn = document.getElementById('openReviewBtn');
         const modal = document.getElementById('reviewModal');
         const stars = modal.querySelectorAll('.star');
         const ratingInput = document.getElementById('ratingInput');
         let currentRating = 0;
 
-        if (openBtn) {
-            openBtn.addEventListener('click', () => {
-                modal.classList.remove('hidden');
-            });
-        }
+        if (openBtn) openBtn.addEventListener('click', () => modal.classList.remove('hidden'));
+
         const showModalForSeller = @json($chat->status === 'buyer_reviewed' && auth()->id() === $chat->seller_id);
-        if (showModalForSeller) {
-            modal.classList.remove('hidden');
-        }
+        if (showModalForSeller) modal.classList.remove('hidden');
 
         stars.forEach(star => {
             star.addEventListener('click', () => {
                 currentRating = star.dataset.value;
                 ratingInput.value = currentRating;
-
-                stars.forEach(s => {
-                    if (s.dataset.value <= currentRating) {
-                        s.classList.add('selected');
-                    } else {
-                        s.classList.remove('selected');
-                    }
-                });
+                stars.forEach(s => s.classList.toggle('selected', s.dataset.value <=
+                    currentRating));
             });
+        });
+
+        // 下書き保存機能
+        const saved = localStorage.getItem('chat_draft_{{ $chat->id }}');
+        if (saved) chatInput.value = saved;
+
+        chatInput.addEventListener('input', () => {
+            localStorage.setItem('chat_draft_{{ $chat->id }}', chatInput.value);
+        });
+
+        chatForm.addEventListener('submit', () => {
+            localStorage.removeItem('chat_draft_{{ $chat->id }}');
         });
     });
 </script>

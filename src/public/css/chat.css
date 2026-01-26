@@ -119,3 +119,8 @@
     height: auto;
     border-radius: 8px;
 }
+.list__error {
+    height: 60px;
+    color: #ff0000;
+    text-align: left;
+}
