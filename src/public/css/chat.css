@@ -99,9 +99,21 @@
 .chat-main__product {
     padding: 20px 50px;
     border-bottom: 2px solid #5f5f5f;
+    display: flex;
 }
 .chat-main__product img {
     width: 20%;
+}
+.product__info {
+    margin-left: 80px;
+}
+.product__info h3 {
+    font-size: 30px;
+    font-weight: bold;
+}
+
+.product__info h4 {
+    font-size: 26px;
 }
 
 .chat-main__messages {
