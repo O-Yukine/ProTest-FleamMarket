@@ -2,9 +2,13 @@
     max-width: 1540px;
     margin: 0 auto;
     display: flex;
+    min-height: 100vh;
 }
 .chat-main {
     width: 85%;
+    height: 100%;
+    box-sizing: border-box;
+    top: 50px;
     display: flex;
     flex-direction: column;
     flex: 1;
@@ -120,6 +124,7 @@
     padding: 20px 50px;
     display: flex;
     flex-direction: column;
+    flex: 1;
     gap: 10px;
 }
 
@@ -193,8 +198,6 @@
 }
 .delet-btn {
     position: absolute;
-    /* bottom: 5px;
-    left: 5px; */
 }
 .chat__error {
     height: 60px;
@@ -203,6 +206,8 @@
 }
 .message__submit {
     display: flex;
+    align-items: center;
+    padding: 30px 30px;
 }
 .custom-file-input {
     margin-top: 5px;
@@ -241,8 +246,23 @@
 .chat-sidebar {
     text-align: center;
     width: 15%;
+    min-height: 100vh;
     padding-right: 10px;
     background: #868686;
     color: #ffffff;
     order: -1;
+}
+.on_going_transaction {
+    width: 150px;
+    height: 40px;
+    background: #eeefeb;
+    border-radius: 5px;
+    padding: 5px;
+    margin: 30px;
+}
+.on_going_transaction a {
+    text-decoration: none;
+}
+.on_going_transaction a:visited {
+    color: #000;
 }

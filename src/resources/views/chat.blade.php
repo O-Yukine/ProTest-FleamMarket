@@ -61,7 +61,7 @@
                             <div class="message__contents--right">
                                 <p>{{ $message->content }}</p>
                                 @if ($message->chat_image)
-                                    <img class="chat-image"
+                                    <img class="message__chat--image"
                                         src="{{ asset('storage/chat_images/' . $message->chat_image) }}" alt="チャット送信画像">
                                 @endif
                             </div>
