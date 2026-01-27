@@ -17,27 +17,29 @@
                     <button class="chat-complite__button" id="openReviewBtn">取引を完了する</button>
                 @endif
             </div>
-
             {{-- モーダル  --}}
             <div id="reviewModal" class="review hidden">
-                <div class="modal-title">
-                    <h1>取引が完了しました。</h1>
+                <div class="review-inner">
+                    <div class="modal-title">
+                        <h1>取引が完了しました。</h1>
+                    </div>
+                    <p>今回の取引相手はどうでしたか?</p>
+                    <div class="star-container">
+                        <span class="star" data-value="1">⭐︎</span>
+                        <span class="star" data-value="2">⭐︎</span>
+                        <span class="star" data-value="3">⭐︎</span>
+                        <span class="star" data-value="4">⭐︎</span>
+                        <span class="star" data-value="5">⭐︎</span>
+                    </div>
+                    <form action="/review" id="reviewForm" method="POST">
+                        @csrf
+                        <input type="hidden" name="score" id="ratingInput" value="0">
+                        <input type="hidden" name="chat_id" value="{{ $chat->id }}">
+                        <input type="hidden" name="reviewee_id" value="{{ $partner->id }}">
+                        <button class="review__submit" type="submit">送信する</button>
+                    </form>
                 </div>
-                <p>今回の取引相手はどうでしたか?</p>
-                <div class="star-container">
-                    <span class="star" data-value="1">⭐︎</span>
-                    <span class="star" data-value="2">⭐︎</span>
-                    <span class="star" data-value="3">⭐︎</span>
-                    <span class="star" data-value="4">⭐︎</span>
-                    <span class="star" data-value="5">⭐︎</span>
-                </div>
-                <form action="/review" id="reviewForm" method="POST">
-                    @csrf
-                    <input type="hidden" name="score" id="ratingInput" value="0">
-                    <input type="hidden" name="chat_id" value="{{ $chat->id }}">
-                    <input type="hidden" name="reviewee_id" value="{{ $partner->id }}">
-                    <button class="review__submit" type="submit">送信する</button>
-                </form>
+
             </div>
             <div class="chat-main__product">
                 <img src="{{ asset('storage/product_images/' . $chat->product->product_image) }}" alt="商品画像">
