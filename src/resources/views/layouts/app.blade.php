@@ -18,7 +18,7 @@
             <div class="header-utilities">
                 <a class="header__logo" href="/"><img src="{{ asset('images/COACHTECH.png') }}"
                         alt="coachtech logo"></a>
-                @unless (Request::is('register') || Request::is('login') || Request::is('/email/verify'))
+                @unless ($simpleHeader ?? false)
                     <div class="search-bar">
                         <form class="form" action="/" method="get">
                             <input type="text" name="keyword" value="{{ request('keyword', session('keyword', '')) }}"
