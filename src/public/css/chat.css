@@ -252,6 +252,31 @@
     color: #ffffff;
     order: -1;
 }
+.chat-closed {
+    padding: 20px;
+    text-align: center;
+    border-top: 1px solid #ccc;
+    background: #f8f8f8;
+}
+
+.chat-closed__icon {
+    font-size: 32px;
+    margin-bottom: 8px;
+}
+
+.chat-closed__title {
+    font-size: 16px;
+    font-weight: bold;
+    color: #444;
+    margin-bottom: 6px;
+}
+
+.chat-closed__text {
+    font-size: 14px;
+    color: #777;
+    line-height: 1.6;
+}
+
 .on_going_transaction {
     width: 150px;
     height: 40px;

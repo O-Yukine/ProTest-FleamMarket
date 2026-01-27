@@ -124,7 +124,13 @@
                     </div>
                 </form>
             @else
-                <p>この取引はレビュー済みのため、チャットの送信はできません。</p>
+                <div class="chat-closed">
+                    <div class="chat-closed__icon">🔒</div>
+                    <p class="chat-closed__title">この取引は完了しました</p>
+                    <p class="chat-closed__text">
+                        これ以上メッセージを送信することはできません。
+                    </p>
+                </div>
             @endif
         </div>
         <aside class="chat-sidebar">
