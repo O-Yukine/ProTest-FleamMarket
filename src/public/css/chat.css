@@ -4,22 +4,38 @@
     display: flex;
 }
 .chat-main {
-    width: 80%;
+    width: 85%;
     display: flex;
     flex-direction: column;
-    gap: 10px;
     flex: 1;
 }
 .chat-main__title {
     display: flex;
     align-items: center;
+    padding: 20px 50px;
     border-bottom: 2px solid #5f5f5f;
 }
 .chat-main__title img {
-    width: 150px;
-    height: 150px;
+    width: 80px;
+    height: 80px;
     border-radius: 100%;
     background-color: rgb(208, 204, 204);
+}
+.chat-main__title h1 {
+    margin-left: 80px;
+}
+
+.chat-complite__button {
+    margin-right: 20px;
+    background: #ff8282;
+    color: #ffffff;
+    font-size: 16px;
+    width: 150px;
+    height: 50px;
+    border: 1px solid #ff8282;
+    border-radius: 30px;
+    position: absolute;
+    right: 20px;
 }
 
 .review {
@@ -81,6 +97,7 @@
     left: 450px;
 }
 .chat-main__product {
+    padding: 20px 50px;
     border-bottom: 2px solid #5f5f5f;
 }
 .chat-main__product img {
@@ -88,6 +105,7 @@
 }
 
 .chat-main__messages {
+    padding: 20px 50px;
     display: flex;
     flex-direction: column;
     gap: 10px;
@@ -95,23 +113,43 @@
 
 .chat-main__messages--right {
     align-self: flex-end;
-    max-width: 60%;
-    background-color: #00c300;
-    color: white;
+    width: 40%;
+}
+.message__profile--right {
+    display: flex;
+    gap: 20px;
+    justify-content: end;
+}
+.message__profile--right p,
+.message__profile--left p {
+    font-weight: bold;
+}
+.message__contents--right {
+    width: 100%;
+    background-color: #b1eab1;
     border-radius: 16px;
-    padding: 10px;
+    padding: 10px 20px;
 }
 
 .chat-main__messages--left {
     align-self: flex-start;
-    max-width: 60%;
-    background-color: #eee;
-    color: black;
-    border-radius: 16px;
-    padding: 10px;
+    width: 40%;
 }
 
-.chat-image__profile {
+.message__profile--left {
+    display: flex;
+    gap: 20px;
+    justify-content: start;
+}
+
+.message__contents--left {
+    width: 100%;
+    background-color: #9bdde1;
+    border-radius: 16px;
+    padding: 10px 20px;
+}
+
+.message__profile--image {
     width: 40px;
     height: 40px;
     border-radius: 50%;
@@ -123,6 +161,28 @@
     height: auto;
     border-radius: 8px;
 }
+.chat-actions {
+    align-self: flex-end;
+    display: flex;
+    padding-right: 50px;
+}
+.edit-btn,
+.delet-btn {
+    border: none;
+    outline: none;
+    background: none;
+    box-shadow: none;
+    color: #5f5f5f;
+    font-size: 14px;
+}
+.edit-btn {
+    position: relative;
+}
+.delet-btn {
+    position: absolute;
+    /* bottom: 5px;
+    left: 5px; */
+}
 .chat__error {
     height: 60px;
     color: #ff0000;
@@ -131,8 +191,8 @@
 
 .chat-sidebar {
     text-align: center;
-    width: 20%;
-    margin-right: 10px;
+    width: 15%;
+    padding-right: 10px;
     background: #868686;
     color: #ffffff;
     order: -1;
