@@ -12,7 +12,7 @@
                 <div class="profile__info">
                     <h1>{{ $user->name }}</h1>
                     @if ($averageReview <= 0)
-                        <h2>レビューはまだありません</h2>
+                        <p>レビューはまだありません</p>
                     @else
                         @for ($i = 1; $i <= 5; $i++)
                             @if ($i <= $averageReview)
