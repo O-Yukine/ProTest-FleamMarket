@@ -6,17 +6,8 @@
 
 @section('content')
     <div class="chat">
-        <div class="chat-lef-tcontent">
-            <h2>その他の取引</h2>
-            @foreach ($transactionOnGoings as $transaction)
-                <div class="on_going_transaction">
-                    <a href="/mypage/profile/item/{{ $transaction->product_id }}">
-                        {{ $transaction->product->name }}</a>
-                </div>
-            @endforeach
-        </div>
-        <div class="chat-right-contents">
-            <div class="chat-title">
+        <div class="chat-main">
+            <div class="chat-main__title">
                 <img src="{{ $partner->profile_image
                     ? asset('storage/profile_images/' . $partner->profile_image)
                     : asset('images/default_profile.png') }}"
@@ -48,17 +39,15 @@
                     <button class="review__submit" type="submit">送信する</button>
                 </form>
             </div>
-
-            {{-- チャットメッセージの表示 --}}
-            <div class="chat-product">
+            <div class="chat-main__product">
                 <img src="{{ asset('storage/product_images/' . $chat->product->product_image) }}" alt="商品画像">
-                <h2>{{ $chat->product->name }}</h2>
+                <h3>{{ $chat->product->name }}</h3>
                 <h3>{{ $chat->product->price }}</h3>
             </div>
-            <div class="chat-messages">
+            <div class="chat-main__messages">
                 @foreach ($messages as $message)
                     @if ($message->sender_id === auth()->id())
-                        <div class="chat-messages__right">
+                        <div class="chat-main__messages--right">
                             <img class="chat-image__profile"
                                 src="{{ $message->sender->profile_image
                                     ? asset('storage/profile_images/' . $message->sender->profile_image)
@@ -71,7 +60,7 @@
                                     alt="チャット送信画像">
                             @endif
                         </div>
-                    @else<div class="chat-messages__left">
+                    @else<div class="chat-main__messages--left">
                             <img class="chat-image__profile"
                                 src="{{ $message->sender->profile_image
                                     ? asset('storage/profile_images/' . $message->sender->profile_image)
@@ -107,7 +96,7 @@
                     <input type="hidden" name="message_id" id="messageId">
                     <input type="hidden" name="receiver_id" value="{{ $partner->id }}">
                     @if (count($errors) > 0)
-                        <ul class="list__error">
+                        <ul class="chat__error">
                             @foreach ($errors->all() as $error)
                                 <li>{{ $error }}</li>
                             @endforeach
@@ -126,6 +115,15 @@
                 <p>この取引はレビュー済みのため、チャットの送信はできません。</p>
             @endif
         </div>
+        <aside class="chat-sidebar">
+            <h2>その他の取引</h2>
+            @foreach ($transactionOnGoings as $transaction)
+                <div class="on_going_transaction">
+                    <a href="/mypage/profile/item/{{ $transaction->product_id }}">
+                        {{ $transaction->product->name }}</a>
+                </div>
+            @endforeach
+        </aside>
     </div>
 @endsection
 
