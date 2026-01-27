@@ -78,7 +78,7 @@
                             <div class="message__contents--left">
                                 <p>{{ $message->content }}</p>
                                 @if ($message->chat_image)
-                                    <img class="chat-image"
+                                    <img class="message__chat--image"
                                         src="{{ asset('storage/chat_images/' . $message->chat_image) }}" alt="チャット送信画像">
                                 @endif
                             </div>
@@ -112,14 +112,16 @@
                             @endforeach
                         </ul>
                     @endif
-                    <div class="chat-message">
-                        <input type="text" name="content" id="chatInput" value="{{ old('content') }}">
+                    <div class="message__submit">
+                        <input type="text" name="content" id="chatInput" value="{{ old('content') }}"
+                            placeholder="取引メッセージを記入してください">
                         <input type="file" name="chat_image" id="chat_image">
                         <label for="chat_image" class="custom-file-input">
                             <span class="file-text">画像を追加</span>
                         </label>
+                        <button class="message__submit--button"type="submit" id="submitBtn"><img
+                                src="{{ asset('images/submit.jpg') }}" alt="送信画像"></button>
                     </div>
-                    <button type="submit" id="submitBtn">送信</button>
                 </form>
             @else
                 <p>この取引はレビュー済みのため、チャットの送信はできません。</p>
