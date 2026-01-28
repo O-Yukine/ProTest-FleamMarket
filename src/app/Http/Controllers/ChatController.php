@@ -109,12 +109,23 @@ class ChatController extends Controller
 
         $chat = Chat::findOrFail($request->chat_id);
 
-        Review::create([
-            'chat_id' => $request->chat_id,
-            'reviewer_id' => $user->id,
-            'reviewee_id' => $request->reviewee_id,
-            'score' => $request->score,
-        ]);
+        $existingReview = Review::where('chat_id', $chat->id)
+            ->where('reviewer_id', $user->id)
+            ->first();
+
+        $existingReview = Review::where('chat_id', $chat->id)
+            ->where('reviewer_id', $user->id)
+            ->first();
+
+        if (!$existingReview) {
+            Review::create([
+                'chat_id' => $chat->id,
+                'reviewer_id' => $user->id,
+                'reviewee_id' => $request->reviewee_id,
+                'score' => $request->score,
+            ]);
+        }
+
 
         $buyerReviewed = $chat->reviews()->where('reviewer_id', $chat->buyer_id)->exists();
         $sellerReviewed = $chat->reviews()->where('reviewer_id', $chat->seller_id)->exists();
