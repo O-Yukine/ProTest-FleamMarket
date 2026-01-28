@@ -230,10 +230,16 @@
     color: #ff5555;
     border: 2px solid #ff5555;
     border-radius: 10px;
-    width: 145px;
-    height: 45px;
-    padding: 5px;
+    width: 140px;
+    height: 40px;
+    max-width: 150px;
+    padding: 5px 25px;
     font-weight: bold;
+    display: inline-block;
+    white-space: nowrap; /* 折り返さない */
+    overflow: hidden; /* はみ出した部分を隠す */
+    text-overflow: ellipsis; /* ... で省略 */
+    vertical-align: middle;
 }
 .message__submit--button {
     margin-left: 15px;

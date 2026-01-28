@@ -188,6 +188,13 @@
             });
         });
 
+        // 選択した画像ファイル名の表示
+        document.getElementById('chat_image').addEventListener('change', e => {
+            const fileName = e.target.files[0]?.name || '画像を追加';
+            e.target.nextElementSibling.querySelector('.file-text').textContent = fileName;
+        });
+
+
         // 下書き保存機能
         const saved = localStorage.getItem('chat_draft_{{ $chat->id }}');
         if (saved) chatInput.value = saved;
