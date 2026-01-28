@@ -13,10 +13,29 @@ class ProductTableSeeder extends Seeder
      *
      * @return void
      */
+
+    private function createProductsForUser($user, $products)
+    {
+        foreach ($products as $item) {
+            $product = $user->products()->create([
+                'name' => $item['name'],
+                'price' => $item['price'],
+                'brand' => $item['brand'],
+                'product_image' => $item['product_image'],
+                'content' => $item['content'],
+                'condition_id' => $item['condition_id'],
+            ]);
+
+            $product->categories()->attach($item['categories']);
+        }
+    }
+
+
     public function run()
     {
-        $user1 = User::first();
-        $user2 = User::skip(1)->first();
+        $user1 = User::where('email', 'taro@example.com')->first();
+        $user2 = User::where('email', 'hanako@example.com')->first();
+
 
         $productsForUser1 = [
             [
@@ -70,21 +89,6 @@ class ProductTableSeeder extends Seeder
             ],
         ];
 
-        foreach ($productsForUser1 as $item) {
-
-            $product = $user1->products()->create([
-                'name' => $item['name'],
-                'price' => $item['price'],
-                'brand' => $item['brand'],
-                'product_image' => $item['product_image'],
-                'content' => $item['content'],
-                'condition_id' => $item['condition_id'],
-            ]);
-
-            $product->categories()->attach($item['categories']);
-        };
-
-
         $productsForUser2 = [
             [
                 'name' => 'マイク',
@@ -137,18 +141,7 @@ class ProductTableSeeder extends Seeder
             ],
         ];
 
-        foreach ($productsForUser2 as $item) {
-
-            $product = $user2->products()->create([
-                'name' => $item['name'],
-                'price' => $item['price'],
-                'brand' => $item['brand'],
-                'product_image' => $item['product_image'],
-                'content' => $item['content'],
-                'condition_id' => $item['condition_id'],
-            ]);
-
-            $product->categories()->attach($item['categories']);
-        };
+        $this->createProductsForUser($user1, $productsForUser1);
+        $this->createProductsForUser($user2, $productsForUser2);
     }
 }
