@@ -119,6 +119,10 @@
         width: 40%;
         margin: 15px;
     }
+    .products_nav {
+        padding: 0px;
+        justify-content: space-evenly;
+    }
 
     .products__list {
         margin: 20px 60px;
