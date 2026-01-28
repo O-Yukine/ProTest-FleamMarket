@@ -145,7 +145,7 @@
     font-weight: bold;
 }
 .message__contents--right {
-    width: 100%;
+    max-width: 100%;
     background-color: #b1eab1;
     border-radius: 16px;
     padding: 10px 20px;
@@ -163,7 +163,7 @@
 }
 
 .message__contents--left {
-    width: 100%;
+    max-width: 100%;
     background-color: #9bdde1;
     border-radius: 16px;
     margin-bottom: 20px;
