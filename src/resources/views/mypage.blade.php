@@ -16,9 +16,9 @@
                     @else
                         @for ($i = 1; $i <= 5; $i++)
                             @if ($i <= $averageReview)
-                                <span class="star_filled">⭐︎</span>
+                                <span class="star_filled">★</span>
                             @else
-                                <span class="star">⭐︎</span>
+                                <span class="star">★</span>
                             @endif
                         @endfor
                     @endif
