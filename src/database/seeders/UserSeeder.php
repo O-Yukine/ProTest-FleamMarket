@@ -18,6 +18,7 @@ class UserSeeder extends Seeder
         $taro = User::create([
             'name' => '香川 太郎',
             'email' => 'taro@example.com',
+            'email_verified_at' => now(),
             'password' => bcrypt('password'),
 
         ]);
@@ -25,6 +26,7 @@ class UserSeeder extends Seeder
         $hanako = User::create([
             'name' => '高松 花子',
             'email' => 'hanako@example.com',
+            'email_verified_at' => now(),
             'password' => bcrypt('password'),
 
         ]);
@@ -32,6 +34,7 @@ class UserSeeder extends Seeder
         $jiro = User::create([
             'name' => '丸亀 二郎',
             'email' => 'jiro@example.com',
+            'email_verified_at' => now(),
             'password' => bcrypt('password'),
 
         ]);

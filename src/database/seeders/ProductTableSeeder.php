@@ -136,7 +136,7 @@ class ProductTableSeeder extends Seeder
                 'brand' => null,
                 'product_image' => 'makeup_set.jpg',
                 'content' => '便利なメイクアップセット',
-                'condition_id' => 3,
+                'condition_id' => 2,
                 'categories' => [1, 4, 6],
             ],
         ];
