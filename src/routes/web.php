@@ -8,7 +8,7 @@ use App\Http\Controllers\ItemController;
 use App\Http\Controllers\CommentController;
 use App\Http\Controllers\LikeController;
 use App\Http\Controllers\PurchaseController;
-use App\Http\Controllers\StripeWebhookController;
+use App\Http\Controllers\ReviewController;
 use App\Http\Controllers\VerifyEmailController;
 
 
@@ -54,7 +54,7 @@ Route::middleware(['auth', 'verified'])->group(function () {
     Route::delete('/chat-room/{message_id}', [ChatController::class, 'deleteMessage']);
 });
 
-Route::post('/review', [ChatController::class, 'submitReview'])->middleware('auth', 'verified');
+Route::post('/review', [ReviewController::class, 'submitReview'])->middleware('auth', 'verified');
 Route::post('/item/{item_id}/comment', [CommentController::class, 'makeComment'])->middleware('auth', 'verified');
 Route::post('/item/{item_id}/like', [LikeController::class, 'likeItem'])->middleware('auth', 'verified');
 
@@ -64,5 +64,3 @@ Route::middleware('auth', 'verified')->prefix('purchase')->group(function () {
     Route::get('/address/{item_id}', [PurchaseController::class, 'showShippingAddress']);
     Route::post('/address/{item_id}', [PurchaseController::class, 'updateShippingAddress']);
 });
-
-// Route::post('/stripe/webhook', [StripeWebhookController::class, 'handle']);

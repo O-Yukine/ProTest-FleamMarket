@@ -78,8 +78,7 @@ class MypageController extends Controller
                 ->get();
         }
 
-        $unReadCount = Message::with('chat')
-            ->where('receiver_id', $user->id)
+        $unReadCount = Message::where('receiver_id', $user->id)
             ->where('is_read', false)
             ->count();
 
@@ -100,11 +99,10 @@ class MypageController extends Controller
 
     public function redirectItem($item_id)
     {
-        $chat = Chat::where('product_id', $item_id)->first();
 
-        if ($chat) {
+        if ($chat = Chat::where('product_id', $item_id)->first()) {
             return   redirect("/chat-room/{$chat->id}");
-        } else {
+        } {
             return redirect("/item/{$item_id}");
         }
     }
