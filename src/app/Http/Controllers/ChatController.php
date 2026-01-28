@@ -36,7 +36,7 @@ class ChatController extends Controller
         $partner = $chat->seller_id === $user->id ? $chat->buyer : $chat->seller;
 
         $transactionOnGoings = Chat::with('product')
-            ->where('status', 'open')
+            ->where('status', '!=', 'completed')
             ->where(function ($q) use ($user) {
                 $q->where('buyer_id', $user->id)
                     ->orWhere('seller_id', $user->id);
