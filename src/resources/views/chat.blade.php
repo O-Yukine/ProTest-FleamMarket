@@ -101,39 +101,29 @@
                     @endif
                 @endforeach
             </div>
-            @if (!in_array($chat->status, ['buyer_reviewed', 'seller_reviewed', 'completed']))
-                <form id="chatForm" action="/chat-room/{{ $chat->id }}" method="POST" enctype="multipart/form-data">
-                    @csrf
-                    <input type="hidden" name="_method" id="formMethod" value="POST">
-                    <input type="hidden" name="message_id" id="messageId">
-                    <input type="hidden" name="receiver_id" value="{{ $partner->id }}">
-                    @if (count($errors) > 0)
-                        <ul class="chat__error">
-                            @foreach ($errors->all() as $error)
-                                <li>{{ $error }}</li>
-                            @endforeach
-                        </ul>
-                    @endif
-                    <div class="message__submit">
-                        <input type="text" name="content" id="chatInput" value="{{ old('content') }}"
-                            placeholder="取引メッセージを記入してください">
-                        <input type="file" name="chat_image" id="chat_image">
-                        <label for="chat_image" class="custom-file-input">
-                            <span class="file-text">画像を追加</span>
-                        </label>
-                        <button class="message__submit--button"type="submit" id="submitBtn"><img
-                                src="{{ asset('images/submit.jpg') }}" alt="送信画像"></button>
-                    </div>
-                </form>
-            @else
-                <div class="chat-closed">
-                    <div class="chat-closed__icon">🔒</div>
-                    <p class="chat-closed__title">この取引は完了しました</p>
-                    <p class="chat-closed__text">
-                        これ以上メッセージを送信することはできません。
-                    </p>
+            <form id="chatForm" action="/chat-room/{{ $chat->id }}" method="POST" enctype="multipart/form-data">
+                @csrf
+                <input type="hidden" name="_method" id="formMethod" value="POST">
+                <input type="hidden" name="message_id" id="messageId">
+                <input type="hidden" name="receiver_id" value="{{ $partner->id }}">
+                @if (count($errors) > 0)
+                    <ul class="chat__error">
+                        @foreach ($errors->all() as $error)
+                            <li>{{ $error }}</li>
+                        @endforeach
+                    </ul>
+                @endif
+                <div class="message__submit">
+                    <input type="text" name="content" id="chatInput" value="{{ old('content') }}"
+                        placeholder="取引メッセージを記入してください">
+                    <input type="file" name="chat_image" id="chat_image">
+                    <label for="chat_image" class="custom-file-input">
+                        <span class="file-text">画像を追加</span>
+                    </label>
+                    <button class="message__submit--button"type="submit" id="submitBtn"><img
+                            src="{{ asset('images/submit.jpg') }}" alt="送信画像"></button>
                 </div>
-            @endif
+            </form>
         </div>
         <aside class="chat-sidebar">
             <h2>その他の取引</h2>
@@ -162,7 +152,6 @@
                 chatForm.action = `/chat-room/${btn.dataset.id}`;
                 formMethod.value = 'PATCH';
                 messageIdInput.value = btn.dataset.id;
-                submitBtn.textContent = '保存';
                 chatInput.focus();
             });
         });
