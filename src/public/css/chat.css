@@ -236,9 +236,9 @@
     padding: 5px 25px;
     font-weight: bold;
     display: inline-block;
-    white-space: nowrap; /* 折り返さない */
-    overflow: hidden; /* はみ出した部分を隠す */
-    text-overflow: ellipsis; /* ... で省略 */
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
     vertical-align: middle;
 }
 .message__submit--button {
@@ -250,16 +250,6 @@
 }
 .message__submit--button img {
     width: 45px;
-}
-
-.chat-sidebar {
-    text-align: center;
-    width: 15%;
-    min-height: 100vh;
-    padding-right: 10px;
-    background: #868686;
-    color: #ffffff;
-    order: -1;
 }
 .chat-closed {
     padding: 20px;
@@ -286,9 +276,18 @@
     line-height: 1.6;
 }
 
+.chat-sidebar {
+    text-align: center;
+    width: 15%;
+    min-height: 100vh;
+    padding-right: 10px;
+    background: #868686;
+    color: #ffffff;
+    order: -1;
+}
+
 .on_going_transaction {
     width: 150px;
-    height: 40px;
     background: #eeefeb;
     border-radius: 5px;
     padding: 5px;
@@ -302,4 +301,61 @@
 }
 
 @media screen and (max-width: 850px) and (min-width: 768px) {
+    .chat-main {
+        width: 75%;
+    }
+
+    .chat-sidebar {
+        width: 25%;
+        padding-right: 10px;
+    }
+    .on_going_transaction {
+        margin: 20px;
+    }
+    .chat-main__title {
+        padding: 10px;
+    }
+    .chat-main__title img {
+        width: 50px;
+        height: 50px;
+    }
+    .chat-main__title h1 {
+        font-size: 28px;
+        margin-left: 20px;
+    }
+    .chat-complite__button {
+        font-size: 12px;
+        width: 100px;
+        height: 30px;
+        right: 0px;
+        padding-right: 5px;
+    }
+    .chat-main__product {
+        padding: 20px 10px;
+    }
+    .chat-main__product img {
+        width: 50%;
+        max-width: 150px;
+        height: auto;
+        object-fit: contain;
+    }
+    .product__info {
+        margin-left: 30px;
+    }
+    .product__info h3 {
+        font-size: 26px;
+        font-weight: bold;
+    }
+
+    .product__info h4 {
+        font-size: 22px;
+    }
+    .chat-main__messages--right,
+    .chat-main__messages--left {
+        width: 60%;
+    }
+    .message__chat--image {
+        max-width: 100px;
+        max-height: 100px;
+    }
 }

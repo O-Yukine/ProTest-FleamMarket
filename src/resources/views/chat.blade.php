@@ -44,8 +44,8 @@
             <div class="chat-main__product">
                 <img src="{{ asset('storage/product_images/' . $chat->product->product_image) }}" alt="商品画像">
                 <div class="product__info">
-                    <h3>商品名：{{ $chat->product->name }}</h3>
-                    <h4>価格：¥ {{ $chat->product->price }}</h4>
+                    <h3>{{ $chat->product->name }}</h3>
+                    <h4>¥ {{ $chat->product->price }}</h4>
                 </div>
             </div>
             <div class="chat-main__messages">
