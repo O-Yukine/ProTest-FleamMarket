@@ -6,7 +6,7 @@
 @section('content')
     <div class="sell-item">
         <div class="sell-item__title">
-            <h2>商品の出品</h2>
+            <h1>商品の出品</h1>
         </div>
         <div class="sell-item__contents">
             <form class="form" action="/sell" method="post" enctype="multipart/form-data">
@@ -27,7 +27,7 @@
                     </div>
                 </div>
                 <div class="contents__subtitle">
-                    <h3>商品の詳細</h3>
+                    <h2>商品の詳細</h2>
                 </div>
                 <div class="form__group">
                     <div class="form__group-title">
@@ -67,7 +67,7 @@
                     </div>
                 </div>
                 <div class="contents__subtitle">
-                    <h3>商品名と説明</h3>
+                    <h2>商品名と説明</h2>
                 </div>
                 <div class="form__group">
                     <div class="form__group-title"><span>商品名</span>

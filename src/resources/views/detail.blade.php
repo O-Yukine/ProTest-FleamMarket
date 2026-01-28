@@ -11,7 +11,7 @@
         </div>
         <div class="right-content">
             <div class="product-detail">
-                <h2 class="product-title">{{ $product->name }}</h2>
+                <h1 class="product-title">{{ $product->name }}</h1>
                 <p class="brand-name">{{ $product->brand }}</p>
                 <p>¥<span class="product-price">{{ number_format($product->price) }}</span>(税込)</p>
                 <div class="product-icons">
@@ -40,9 +40,9 @@
                     <button class="order__button-submit" type="submit">購入手続きへ</button>
                 </form>
 
-                <h3>商品説明</h3>
+                <h2>商品説明</h2>
                 <p class="product-contents">{{ $product->content }} </p>
-                <h3>商品の情報</h3>
+                <h2>商品の情報</h2>
                 <div class="product-info">
                     <div class="product-category">
                         <span class="info-label">カテゴリー</span>
@@ -59,8 +59,8 @@
                 </div>
             </div>
             <div class="product__comments">
-                <h3>コメント({{ $commentCount }})
-                </h3>
+                <h2>コメント({{ $commentCount }})
+                </h2>
                 @isset($product->comments)
                     @foreach ($product->comments as $comment)
                         <div class="comment__title">

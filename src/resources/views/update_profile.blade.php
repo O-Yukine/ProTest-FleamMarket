@@ -8,7 +8,7 @@
 @section('content')
     <div class="update_profile">
         <div class="profile__title">
-            <h2>プロフィール設定</h2>
+            <h1>プロフィール設定</h1>
         </div>
         <form class="form" action="/mypage/profile" enctype="multipart/form-data" method="post">
             @csrf

@@ -13,13 +13,13 @@
                         <img src="{{ asset('storage/product_images/' . $product->product_image) }}" alt="商品画像">
                     </div>
                     <div class="order-information">
-                        <h3>{{ $product->name }}</h3>
+                        <h1>{{ $product->name }}</h1>
                         <p>¥{{ number_format($product->price) }}</p>
                     </div>
                 </div>
                 <div class="payment-type">
                     <div class="payment-type__title">
-                        <h4>支払い方法</h4>
+                        <h2>支払い方法</h2>
                     </div>
                     <div class="form__error">
                         @error('payment_method')
@@ -32,7 +32,7 @@
                 </div>
                 <div class="shipping-address">
                     <div class="shipping-address__title">
-                        <h4>配送先</h4>
+                        <h2>配送先</h2>
                         <a href="/purchase/address/{{ $product->id }}">変更する</a>
                     </div>
                     <div class="shipping-address__contents">
