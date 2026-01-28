@@ -84,7 +84,8 @@ class MypageController extends Controller
             ->count();
 
         $review = Review::where('reviewee_id', $user->id)->avg('score') ?? 0;
-        $averageReview = round($review, 2);
+        $averageReview = round($review, 0, PHP_ROUND_HALF_UP);
+
 
         return view('mypage', compact(
             'user',

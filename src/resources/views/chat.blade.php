@@ -25,11 +25,11 @@
                     </div>
                     <p>今回の取引相手はどうでしたか?</p>
                     <div class="star-container">
-                        <span class="star" data-value="1">⭐︎</span>
-                        <span class="star" data-value="2">⭐︎</span>
-                        <span class="star" data-value="3">⭐︎</span>
-                        <span class="star" data-value="4">⭐︎</span>
-                        <span class="star" data-value="5">⭐︎</span>
+                        <span class="star" data-value="1">★</span>
+                        <span class="star" data-value="2">★</span>
+                        <span class="star" data-value="3">★</span>
+                        <span class="star" data-value="4">★</span>
+                        <span class="star" data-value="5">★</span>
                     </div>
                     <form action="/review" id="reviewForm" method="POST">
                         @csrf

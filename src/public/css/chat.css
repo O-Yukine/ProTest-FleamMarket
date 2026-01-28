@@ -44,8 +44,8 @@
     border: 1px solid black;
     background: #fdfce6;
     border-radius: 15px;
-    width: 600px;
-    height: 330px;
+    width: 520px;
+    height: 360px;
     position: fixed;
     top: 50%;
     left: 50%;
@@ -78,7 +78,7 @@
     width: 100%;
     cursor: pointer;
     text-align: center;
-    font-size: 60px;
+    font-size: 80px;
     color: #d9d9d9;
 }
 
@@ -101,7 +101,7 @@
     padding: 5px;
     border: 1px solid #ff8282;
     position: absolute;
-    left: 450px;
+    left: 360px;
 }
 .chat-main__product {
     padding: 20px 50px;
