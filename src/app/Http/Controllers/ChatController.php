@@ -71,7 +71,7 @@ class ChatController extends Controller
         return redirect("/chat-room/{$chat_id}");
     }
 
-    public function updateMessage(Request $request, $message_id)
+    public function updateMessage(ChatRequest $request, $message_id)
     {
 
         $message = Message::findOrFail($message_id);
