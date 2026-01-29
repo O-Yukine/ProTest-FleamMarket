@@ -6,7 +6,7 @@
 
 1. リポジトリをクローン
 
-   `git clone git@github.com:O-Yukine/Mock-Project-FleaMarketApp.git`
+   `git clone git@github.com:O-Yukine/ProTest-FleamMarket.git`
 
 2. Docker アプリを立ち上げる
 
