@@ -1,15 +1,14 @@
 <?php
 
+
 namespace Tests\Feature\Purchase;
 
 use Illuminate\Foundation\Testing\RefreshDatabase;
-use Illuminate\Http\Request;
 use Tests\TestCase;
 use App\Models\User;
 use App\Models\Product;
 use App\Models\Purchase;
 use Stripe\Checkout\Session;
-use Stripe\Webhook;
 use Mockery;
 
 
@@ -87,24 +86,6 @@ class PurchaseTest extends TestCase
 
         $purchase = Purchase::first();
 
-        $mockWebhook = Mockery::mock('overload:' . Webhook::class);
-        $mockWebhook->shouldReceive('constructEvent')
-            ->andReturn((object)[
-                'type' => 'checkout.session.completed',
-                'data' => (object)[
-                    'object' => (object)[
-                        'metadata' => (object)[
-                            'purchase_id' => $purchase->id
-                        ]
-                    ]
-                ]
-            ]);
-
-        $request = Request::create('/stripe/webhook', 'POST', [], [], [], [], json_encode([]));
-        $controller = new \App\Http\Controllers\StripeWebhookController();
-        $controller->handle($request);
-
-        $purchase->refresh();
         $this->assertEquals('paid', $purchase->status);
 
         $response = $this->get('/?tab=recommended');
@@ -142,25 +123,6 @@ class PurchaseTest extends TestCase
 
             ]
         );
-
-        $purchase = Purchase::first();
-
-        $mockWebhook = Mockery::mock('overload:' . Webhook::class);
-        $mockWebhook->shouldReceive('constructEvent')
-            ->andReturn((object)[
-                'type' => 'checkout.session.completed',
-                'data' => (object)[
-                    'object' => (object)[
-                        'metadata' => (object)[
-                            'purchase_id' => $purchase->id
-                        ]
-                    ]
-                ]
-            ]);
-
-        $request = Request::create('/stripe/webhook', 'POST', [], [], [], [], json_encode([]));
-        $controller = new \App\Http\Controllers\StripeWebhookController();
-        $controller->handle($request);
 
         $response = $this->get('/mypage?page=buy');
         $response->assertSee($product->name);

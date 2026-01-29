@@ -1,4 +1,4 @@
-# 模擬案件１　フリマアプリ
+# Proテスト　フリマアプリ
 
 ## 環境構築
 
@@ -159,7 +159,7 @@
 
     `CREATE DATABASE laravel_test;`
 
-2.  テスト用.env を作る
+2.  テスト用.env を作る (Docker コンテナ内)
 
     `cp .env .env.testing`
 
