@@ -199,9 +199,21 @@
 - Laravel8.83.8
 - MySQL8.0.26
 
-## ER 図
+## ER図：オーバービュー
 
-![ER図](./flea_market.drawio.png)
+![ユーザーER図](docs/er_overview.png)
+
+## ER図：ユーザー関連
+
+![ユーザーER図](docs/er_users.png)
+
+## ER図：商品関連
+
+![商品ER図](docs/er_products.png)
+
+## ER図：チャット関連
+
+![取引ER図](docs/er_chat.png)
 
 ## URL
 
