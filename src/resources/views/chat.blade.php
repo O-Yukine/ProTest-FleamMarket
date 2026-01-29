@@ -8,8 +8,8 @@
     <div class="chat">
         <div class="chat-main">
             <div class="chat-main__title">
-                <img src="{{ $partner->profile_image
-                    ? asset('storage/profile_images/' . $partner->profile_image)
+                <img src="{{ $partner->profile->profile_image
+                    ? asset('storage/profile_images/' . $partner->profile->profile_image)
                     : asset('images/default_profile.png') }}"
                     alt="ユーザープロフィール写真">
                 <h1>{{ $partner->name }}さんとの取引画面</h1>
@@ -55,8 +55,8 @@
                             <div class="message__profile--right">
                                 <p>{{ $message->sender->name }}</p>
                                 <img class="message__profile--image"
-                                    src="{{ $message->sender->profile_image
-                                        ? asset('storage/profile_images/' . $message->sender->profile_image)
+                                    src="{{ $message->sender->profile->profile_image
+                                        ? asset('storage/profile_images/' . $message->sender->profile->profile_image)
                                         : asset('images/default_profile.png') }}"
                                     alt="ユーザープロフィール写真">
                             </div>
@@ -71,8 +71,8 @@
                     @else<div class="chat-main__messages--left">
                             <div class="message__profile--left">
                                 <img class="message__profile--image"
-                                    src="{{ $message->sender->profile_image
-                                        ? asset('storage/profile_images/' . $message->sender->profile_image)
+                                    src="{{ $message->sender->profile->profile_image
+                                        ? asset('storage/profile_images/' . $message->sender->profile->profile_image)
                                         : asset('images/default_profile.png') }}"
                                     alt="ユーザープロフィール写真">
                                 <p>{{ $message->sender->name }}</p>

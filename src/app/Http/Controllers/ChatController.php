@@ -15,10 +15,11 @@ class ChatController extends Controller
         $user = auth()->user();
 
         $chat = Chat::with([
-            'buyer',
-            'seller',
+            'buyer.profile',
+            'seller.profile',
             'product',
-            'messages.sender'
+            'messages.sender',
+            'messages.sender.profile'
         ])
             ->findOrFail($chat_id);
 

@@ -33,6 +33,7 @@
 }
 .order-information h1 {
     margin-top: 0;
+    font-size: 32px;
 }
 .payment-type,
 .shipping-address {
