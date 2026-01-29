@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
+
 use App\Models\Chat;
 use App\Models\Message;
 use App\Http\Requests\ChatRequest;
